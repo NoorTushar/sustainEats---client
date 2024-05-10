@@ -10,6 +10,7 @@ export default {
             ourAsh: "#6F7775",
             ourBlack: `#213430`,
             ourPrimary: "#009368",
+            ourOrange: "#ECA303",
          },
          backgroundColor: {
             ourOrange: "#ECA303",

@@ -60,7 +60,7 @@ const NavBar = () => {
             <Link to={"/"} className="flex items-center gap-1">
                <img className="size-10" src={logo} alt="" />
                <span to={"/"} className="text-xl text-ourPrimary">
-                  SustainEats
+                  Sustain<span className="text-ourOrange">Eats</span>
                </span>
             </Link>
          </div>
