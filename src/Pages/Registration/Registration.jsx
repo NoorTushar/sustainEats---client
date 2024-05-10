@@ -31,13 +31,13 @@ const Registration = () => {
 
       // create user imported from AuthContext
       try {
-         const result = await createUser(email, password);
+         await createUser(email, password);
          await updateUser(userName, photoURL);
 
          // have to set loading to false else after
          // redirecting to page, it will keep showing the loader
          setLoading(false);
-
+         reset();
          Swal.fire({
             title: "Success!",
             text: "Registration Successful!",
