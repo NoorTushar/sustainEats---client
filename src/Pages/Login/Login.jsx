@@ -5,26 +5,57 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 // React-Hook-Form: (1)
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
-   const { loginWithGoogle } = useAuth();
+   const { loginWithGoogle, loginUser } = useAuth();
 
    // React-Hook-Form: (2a)
    const {
       register,
       handleSubmit,
       getValues,
+      reset,
       formState: { errors },
    } = useForm();
 
    // React-Hook-Form: (2b)
-   const onSubmit = () => {
+   const onSubmit = async () => {
       const email = getValues("email");
       const password = getValues("password");
 
       console.log(email, password);
+
+      try {
+         const result = await loginUser(email, password);
+         console.log(result);
+         reset();
+
+         Swal.fire({
+            title: "Success!",
+            text: "Logged in successfully!",
+            icon: "success",
+            confirmButtonText: "Ok",
+         });
+      } catch (error) {
+         console.log(error);
+         const errorMessage = error.message
+            .split("Firebase: Error (auth/")[1]
+            .split(")")[0]
+            .replace(/-/g, " ");
+
+         Swal.fire({
+            title: "Failure!",
+            text: `${errorMessage}`,
+            icon: "error",
+            width: 600,
+            color: "#A65F3F",
+            background: "",
+            confirmButtonText: "Ok",
+         });
+      }
    };
 
    // login with google using firebase
@@ -208,12 +239,12 @@ const Login = () => {
             <div className="flex items-center justify-between mt-4">
                <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-               <a
-                  href="#"
+               <Link
+                  to={"/registration"}
                   className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
                >
-                  or sign up
-               </a>
+                  or register
+               </Link>
 
                <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
             </div>
