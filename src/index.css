@@ -5,3 +5,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .lightButton {
+   background-color: #fff;
+   color: #213430;
+   border-color: #eca303;
+}
+
+.lightButton:hover {
+   background-color: #eca303;
+} */

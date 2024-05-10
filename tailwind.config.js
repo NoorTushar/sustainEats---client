@@ -6,6 +6,17 @@ export default {
          fontFamily: {
             poppins: '"Poppins", sans-serif',
          },
+         colors: {
+            ourAsh: "#6F7775",
+            ourBlack: `#213430`,
+            ourPrimary: "#009368",
+         },
+         backgroundColor: {
+            ourOrange: "#ECA303",
+         },
+         borderColor: {
+            ourOrange: "#ECA303",
+         },
       },
    },
    plugins: [require("daisyui")],
