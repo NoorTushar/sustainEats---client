@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",
     "firebase": "^10.11.1",
+    "firebase-tools": "^13.8.2",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.4",
     "prop-types": "^15.8.1",
