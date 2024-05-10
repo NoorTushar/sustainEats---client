@@ -29,7 +29,7 @@ const NavBar = () => {
    return (
       <div className="navbar bg-base-100">
          <div className="navbar-start">
-            <div className="dropdown">
+            <div className="dropdown z-50">
                <div
                   tabIndex={0}
                   role="button"
@@ -67,9 +67,13 @@ const NavBar = () => {
          <div className="navbar-center hidden lg:flex">
             <ul className="menu menu-horizontal px-1">{navItem}</ul>
          </div>
+
          <div className="navbar-end">
             {user?.email ? (
-               <div className="dropdown dropdown-end" title={user.displayName}>
+               <div
+                  className="dropdown dropdown-end z-50"
+                  title={user.displayName}
+               >
                   <div
                      tabIndex={0}
                      role="button"
