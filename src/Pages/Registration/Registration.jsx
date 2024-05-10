@@ -30,31 +30,37 @@ const Registration = () => {
       console.log(userName, email, password, photoURL);
 
       // create user imported from AuthContext
-      createUser(email, password)
-         .then(() => {
-            // update user imported from AuthContext
-            updateUser(userName, photoURL).then(() => {
-               // have to set loading to false else after
-               // redirecting to page, it will keep showing the loader
-               setLoading(false);
+      try {
+         const result = await createUser(email, password);
+         await updateUser(userName, photoURL);
 
-               Swal.fire({
-                  title: "Success!",
-                  text: "Registration Successful!",
-                  icon: "success",
+         // have to set loading to false else after
+         // redirecting to page, it will keep showing the loader
+         setLoading(false);
 
-                  confirmButtonText: "Ok",
-               });
-            });
-         })
-         .catch((error) => {
-            let errorMessage = error.message
-               .split("Firebase: Error (auth/")[1]
-               .split(")")[0]
-               .replace(/-/g, " ");
-
-            console.log(errorMessage);
+         Swal.fire({
+            title: "Success!",
+            text: "Registration Successful!",
+            icon: "success",
+            confirmButtonText: "Ok",
          });
+      } catch (error) {
+         console.log(error);
+         const errorMessage = error.message
+            .split("Firebase: Error (auth/")[1]
+            .split(")")[0]
+            .replace(/-/g, " ");
+
+         Swal.fire({
+            title: "Failure!",
+            text: `${errorMessage}`,
+            icon: "error",
+            width: 600,
+            color: "#A65F3F",
+            background: "",
+            confirmButtonText: "Ok",
+         });
+      }
    };
 
    // login with google using firebase
