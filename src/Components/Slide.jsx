@@ -1,7 +1,7 @@
 const Slide = () => {
    return (
       <div
-         className="hero min-h-screen"
+         className="hero min-h-[calc(100vh-68px)]"
          style={{
             backgroundImage:
                "url(https://images.pexels.com/photos/9947261/pexels-photo-9947261.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1)",

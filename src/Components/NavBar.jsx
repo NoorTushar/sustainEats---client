@@ -7,9 +7,16 @@ const NavBar = () => {
    const { user, logoutUser } = useAuth();
 
    const navItem = (
-      <li>
-         <Link to={"/"}>Home</Link>
-      </li>
+      <>
+         <li>
+            <Link to={"/"}>Home</Link>
+         </li>
+         {user?.email && (
+            <li>
+               <Link to={"/add-food"}>Add Food</Link>
+            </li>
+         )}
+      </>
    );
 
    const handleLogOut = async () => {
