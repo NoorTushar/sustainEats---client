@@ -25,6 +25,7 @@ const FoodCard = ({ food }) => {
             <p>Quantity: {foodQuantity}</p>
             <p>Expiry Date: {new Date(expiredDate).toLocaleDateString()}</p>
             <p>Pickup Location: {pickupLocation}</p>
+            <p>Additional Notes: {additionalNotes}</p>
             {/* Donor Info */}
             <div>
                <p className="mb-2">Donated by:</p>
