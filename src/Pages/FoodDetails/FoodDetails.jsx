@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Triangle } from "react-loader-spinner";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const FoodDetails = () => {
    const foodId = useParams().id;
+   const { user } = useAuth();
 
    const { data: food = {}, isLoading } = useQuery({
       queryFn: async () => {
@@ -44,6 +46,21 @@ const FoodDetails = () => {
          </div>
       );
    }
+
+   const handleCloseModal = () => {
+      document.getElementById("request_form_modal").close();
+   };
+
+   const handleMakeRequest = (e) => {
+      e.preventDefault();
+
+      const form = e.target;
+      const foodName = form.foodName.value;
+      // Perform request handling logic here
+      console.log("Request made!", foodName);
+      alert("request made");
+      handleCloseModal(); // Close modal after request is made
+   };
 
    return (
       <section className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
@@ -129,10 +146,212 @@ const FoodDetails = () => {
                   additional-info
                </h3>
                <p className=" leading-[25px]  my-3">{additionalNotes}</p>
-               <button className="inline-block px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack border border-ourOrange mt-4">
+               <button
+                  onClick={() =>
+                     document.getElementById("request_form_modal").showModal()
+                  }
+                  className="inline-block px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack border border-ourOrange mt-4"
+               >
                   <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white  group-hover:h-full opacity-90"></span>
                   <span className="relative">Make Request</span>
                </button>
+
+               {/* Modal: Request Form */}
+               <dialog id="request_form_modal" className="modal">
+                  <div className="modal-box">
+                     <button
+                        className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        onClick={handleCloseModal}
+                     >
+                        ✕
+                     </button>
+                     <h3 className="font-bold text-lg text-ourPrimary">
+                        Make a Request
+                     </h3>
+                     <form onSubmit={handleMakeRequest}>
+                        <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
+                           {/* requestorEmail */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="foodName"
+                              >
+                                 Requested By
+                              </label>
+                              <input
+                                 defaultValue={user?.email}
+                                 id="req_email"
+                                 name="req_email"
+                                 type="email"
+                                 disabled
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+
+                           {/* requestedDate */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="foodName"
+                              >
+                                 Requested On
+                              </label>
+                              <input
+                                 id="req_date"
+                                 name="req_date"
+                                 type="text"
+                                 defaultValue={new Date().toLocaleDateString()}
+                                 disabled
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+                           {/* foodName */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_foodName"
+                              >
+                                 Food Name
+                              </label>
+                              <input
+                                 defaultValue={foodName}
+                                 id="req_foodName"
+                                 name="req_foodName"
+                                 type="text"
+                                 disabled
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+                           {/* foodImage */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_foodImage"
+                              >
+                                 Food Image
+                              </label>
+                              <input
+                                 defaultValue={foodImage}
+                                 disabled
+                                 id="req_foodImage"
+                                 name="req_foodImage"
+                                 type="text"
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+                           {/* Food Id */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_foodId"
+                              >
+                                 Food Id
+                              </label>
+                              <input
+                                 defaultValue={food._id}
+                                 disabled
+                                 id="req_foodId"
+                                 name="req_foodId"
+                                 type="text"
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_donorName"
+                              >
+                                 Donor Name
+                              </label>
+                              <input
+                                 defaultValue={donor?.donorName}
+                                 disabled={true}
+                                 id="req_donorName"
+                                 name="req_donorName"
+                                 type="text"
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+                           {/* donorEmail */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_donorEmail"
+                              >
+                                 Donor Email
+                              </label>
+                              <input
+                                 defaultValue={donor.donorEmail}
+                                 disabled={true}
+                                 id="req_donorEmail"
+                                 name="req_donorEmail"
+                                 type="text"
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+
+                           {/* pickupLocation */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_pickupLocation"
+                              >
+                                 Pickup Location
+                              </label>
+                              <input
+                                 id="req_pickupLocation"
+                                 name="req_pickupLocation"
+                                 disabled
+                                 defaultValue={pickupLocation}
+                                 type="text"
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                              />
+                           </div>
+                           {/* expiredDate */}
+                           <div>
+                              <p className="text-gray-700 dark:text-gray-200">
+                                 Expired Date
+                              </p>
+                              <input
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                                 type="text"
+                                 disabled
+                                 name="req_expiredDate"
+                                 defaultValue={new Date(
+                                    expiredDate
+                                 ).toLocaleDateString()}
+                              />
+                           </div>
+
+                           {/* additionalNotes */}
+                           <div>
+                              <label
+                                 className="text-gray-700 dark:text-gray-200"
+                                 htmlFor="req_additionalNotes"
+                              >
+                                 Additional Notes
+                              </label>
+                              <input
+                                 required
+                                 id="req_additionalNotes"
+                                 name="req_additionalNotes"
+                                 type="text"
+                                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                              />
+                           </div>
+                        </div>
+
+                        <button
+                           type="submit"
+                           className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
+                        >
+                           <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
+                           <span className="relative">Request</span>
+                        </button>
+                     </form>
+                  </div>
+               </dialog>
             </div>
          </div>
       </section>
