@@ -5,9 +5,17 @@ import { useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const FoodDetails = () => {
+   // food id nicchi jeita diye data fetch and pore update korbo
    const foodId = useParams().id;
+   // user lagbe cause pore user er email ta request food er jonne lagbe
    const { user } = useAuth();
 
+   // tanstack query for GET Method (1) : id er against e data load korbo
+   // steps:
+   // 1 - useQuery()
+   // 2 - data and oitar akta name dibo and initially ki object naki array.
+   // 3 - queryFn: async function diye data load and return the data
+   // 4 - queryKey
    const { data: food = {}, isLoading } = useQuery({
       queryFn: async () => {
          const result = await axios(
@@ -20,7 +28,7 @@ const FoodDetails = () => {
       queryKey: ["food"],
    });
 
-   // tanstack for post method: creating a food request
+   // tanstack for POST method (1): creating a food request
    const { mutateAsync, error } = useMutation({
       mutationFn: async (requestedFood) => {
          const result = await axios.post(
@@ -49,6 +57,7 @@ const FoodDetails = () => {
       donor,
    } = food;
 
+   // tanstack query for GET Method (2) : data load howa porjonto akta loader dekhabo
    if (isLoading) {
       return (
          <div className="min-h-[calc(100vh-392px)] flex items-center justify-center">
@@ -98,10 +107,21 @@ const FoodDetails = () => {
       };
 
       // Perform request handling logic here
-      // Tanstack (3)
+
+      /**
+       *   tanstack query for GET Method (3) : await er akta
+       *   handle request press korle mutatedAsync function ta call hobe.
+       *   and call hoile POST request tao execute hobe.
+       */
+
       try {
          await mutateAsync(requestedFood);
 
+         /* 
+          PATCH Request (1) : Request button e press hoile Patch execute hobe.
+          Aita tanstack charai korsi. as already tanstack diye post kortesi.
+          Simple rakhar jonne only axios use korsi.
+        */
          await axios.patch(`${import.meta.env.VITE_API_URL}/food/${foodId}`, {
             foodStatus: "Requested",
          });
