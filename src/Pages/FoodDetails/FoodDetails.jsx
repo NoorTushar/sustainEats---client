@@ -173,7 +173,7 @@ const FoodDetails = () => {
                </div>
             </div>
             {/* grid container */}
-            <div className=" grid lg:grid-cols-7 gap-10 mt-[30px] items-center">
+            <div className=" grid lg:grid-cols-7 gap-10 mt-[30px] ">
                {/* img */}
                <div className="lg:col-span-4">
                   <img src={foodImage} alt={foodName} />
@@ -184,7 +184,7 @@ const FoodDetails = () => {
                      {foodName}
                   </h2>
 
-                  <div className="*:mb-3 mt-6">
+                  <div className="*:mb-3 mt-2">
                      <div className="flex items-center gap-2">
                         <h3 className="capitalize text-[17px] tracking-[1px] font-medium  ">
                            status:{" "}
