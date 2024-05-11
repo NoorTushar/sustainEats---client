@@ -12,6 +12,10 @@ const NavBar = () => {
          <li>
             <Link to={"/"}>Home</Link>
          </li>
+         <li>
+            <Link to={"/available-foods"}>Available Foods</Link>
+         </li>
+
          {user?.email && (
             <li>
                <Link to={"/add-food"}>Add Food</Link>
