@@ -148,8 +148,32 @@ const FoodDetails = () => {
 
          {/* food details section */}
          <div className="max-w-[1170px] mx-auto w-[90%] md:w-[82%]">
+            {/* Donator Information */}
+            <div>
+               <h3 className="capitalize text-[17px] tracking-[1px] font-medium ">
+                  Donated By:
+               </h3>
+               <div className="h-[1px] bg-ourOrange w-[160px] my-2"></div>
+               <div className="flex items-center space-x-4 mt-3">
+                  <img
+                     src={donor.donorImage}
+                     className="size-14 rounded-full"
+                     alt=""
+                  />
+                  <h3 className="font-medium">{donor.donorName}</h3>
+               </div>
+
+               <div className="flex items-center gap-2 mt-1">
+                  <h3 className="capitalize text-[16px] tracking-[1px] font-medium  ">
+                     Pickup Location:{" "}
+                  </h3>
+                  <p className=" capitalize leading-[25px] ">
+                     {pickupLocation}
+                  </p>
+               </div>
+            </div>
             {/* grid container */}
-            <div className=" grid lg:grid-cols-7 gap-10 mt-[60px] items-center">
+            <div className=" grid lg:grid-cols-7 gap-10 mt-[30px] items-center">
                {/* img */}
                <div className="lg:col-span-4">
                   <img src={foodImage} alt={foodName} />
@@ -181,35 +205,11 @@ const FoodDetails = () => {
 
                      <div className="flex items-center gap-2">
                         <h3 className="capitalize text-[17px] tracking-[1px] font-medium  ">
-                           Pickup Location:{" "}
-                        </h3>
-                        <p className=" capitalize leading-[25px] ">
-                           {pickupLocation}
-                        </p>
-                     </div>
-
-                     <div className="flex items-center gap-2">
-                        <h3 className="capitalize text-[17px] tracking-[1px] font-medium  ">
                            expiry date:{" "}
                         </h3>
                         <p className=" capitalize leading-[25px] ">
                            {new Date(expiredDate).toLocaleDateString()}
                         </p>
-                     </div>
-                  </div>
-
-                  <div>
-                     <h3 className="capitalize text-[17px] tracking-[1px] font-medium ">
-                        Donated By:
-                     </h3>
-                     <div className="h-[1px] bg-ourOrange w-[160px] my-2"></div>
-                     <div className="flex items-center space-x-4 mt-3">
-                        <img
-                           src={donor.donorImage}
-                           className="size-14 rounded-full"
-                           alt=""
-                        />
-                        <p>{donor.donorName}</p>
                      </div>
                   </div>
                </div>
