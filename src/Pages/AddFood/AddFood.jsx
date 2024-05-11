@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 // Tanstack (1)
 import { useMutation } from "@tanstack/react-query";
+import Swal from "sweetalert2";
 
 const AddFood = () => {
    const { user } = useAuth();
@@ -24,6 +25,7 @@ const AddFood = () => {
          donorName: `${user?.displayName}`,
          donorImage: `${user?.photoURL}`,
          donorEmail: `${user?.email}`,
+         foodStatus: "Available",
       },
    });
 
@@ -37,7 +39,12 @@ const AddFood = () => {
          console.log(result.data);
       },
       onSuccess: () => {
-         alert("food submitted");
+         Swal.fire({
+            title: "Thank you!",
+            text: "Your food item was added successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+         });
       },
    });
 
@@ -271,10 +278,11 @@ const AddFood = () => {
                               message: "Must provide a foodStatus",
                            },
                         })}
+                        disabled
                         id="foodStatus"
                         name="foodStatus"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
                      {errors?.foodStatus && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">

@@ -11,12 +11,15 @@ import {
    updateProfile,
 } from "firebase/auth";
 import { auth } from "../Firebase/firebase.config";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 const gitHubProvider = new GithubAuthProvider();
 
 const AuthProvider = ({ children }) => {
+   const axiosSecure = useAxiosSecure();
+
    // current user:
    const [user, setUser] = useState(null);
 
@@ -63,9 +66,31 @@ const AuthProvider = ({ children }) => {
    // observe user of firebase
    useEffect(() => {
       const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+         /*** JWT Steps Start - 1 *** */
+         // getting the email for JWT
+         const userEmail = currentUser?.email || user?.email;
+         // object e convert kortesi to pass the JSON object to the backend
+         // to create a token
+         const loggedUser = { email: userEmail };
+         /*** JWT Steps End *** */
+
          console.log("this is the current user: ", currentUser);
          setUser(currentUser);
          setLoading(false);
+
+         /*** JWT Steps Start - 2 *** */
+         // generating jwt token if user is available
+         if (currentUser) {
+            axiosSecure
+               .post("/jwt", loggedUser)
+               .then((res) => {
+                  console.log(res.data);
+               })
+               .catch((err) => {
+                  console.log(err);
+               });
+         }
+         /*** JWT Steps End *** */
       });
 
       return () => {
