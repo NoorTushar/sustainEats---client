@@ -101,6 +101,12 @@ const FoodDetails = () => {
       // Tanstack (3)
       try {
          await mutateAsync(requestedFood);
+
+         await axios.patch(`${import.meta.env.VITE_API_URL}/food/${foodId}`, {
+            foodStatus: "Requested",
+         });
+
+         console.log(`successsfully updated status and posted request`);
       } catch (error) {
          console.log("Error submitting food:", error);
       }
