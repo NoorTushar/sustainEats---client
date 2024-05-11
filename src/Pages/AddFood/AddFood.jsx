@@ -3,9 +3,11 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // React-Hook-Form: (1)
 import { Controller, useForm } from "react-hook-form";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AddFood = () => {
    const { user } = useAuth();
+   const axiosSecure = useAxiosSecure();
 
    // React-Hook-Form: (2a)
    const {
@@ -38,7 +40,7 @@ const AddFood = () => {
          donorEmail: getValues("donorEmail"),
       };
 
-      console.log({
+      const food = {
          foodName,
          foodImage,
          foodQuantity,
@@ -47,7 +49,16 @@ const AddFood = () => {
          additionalNotes,
          foodStatus,
          donor,
-      });
+      };
+
+      console.log(food);
+
+      try {
+         const result = await axiosSecure.post("/foods", food);
+         console.log(result.data);
+      } catch (error) {
+         console.log(error);
+      }
 
       reset();
    };
