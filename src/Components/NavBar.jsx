@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo_sustainEats.png";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const NavBar = () => {
    const { user, logoutUser } = useAuth();
+   const navigate = useNavigate();
 
    const navItem = (
       <>
@@ -19,7 +20,8 @@ const NavBar = () => {
       </>
    );
 
-   const handleLogOut = async () => {
+   const handleLogOut = async (e) => {
+      e.preventDefault();
       try {
          await logoutUser();
          Swal.fire({
@@ -28,6 +30,7 @@ const NavBar = () => {
             icon: "success",
             confirmButtonText: "Ok",
          });
+         navigate("/");
       } catch (error) {
          console.log(error);
       }
