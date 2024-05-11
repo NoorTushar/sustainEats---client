@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Triangle } from "react-loader-spinner";
 import { useParams } from "react-router-dom";
@@ -18,6 +18,24 @@ const FoodDetails = () => {
          return result.data;
       },
       queryKey: ["food"],
+   });
+
+   // tanstack for post method: creating a food request
+   const { mutateAsync, error } = useMutation({
+      mutationFn: async (requestedFood) => {
+         const result = await axios.post(
+            `${import.meta.env.VITE_API_URL}/request-food`,
+            requestedFood
+         );
+         console.log(result.data);
+      },
+      onSuccess: () => {
+         alert("tan stack alert - request success");
+      },
+      onError: () => {
+         alert(error.message);
+         console.log(error);
+      },
    });
 
    const {
@@ -51,15 +69,46 @@ const FoodDetails = () => {
       document.getElementById("request_form_modal").close();
    };
 
-   const handleMakeRequest = (e) => {
+   const handleMakeRequest = async (e) => {
       e.preventDefault();
 
       const form = e.target;
-      const foodName = form.foodName.value;
+      const req_foodName = form.req_foodName.value;
+      const req_foodImage = form.req_foodImage.value;
+      const req_pickupLocation = form.req_pickupLocation.value;
+      const req_expiredDate = form.req_expiredDate.value;
+      const req_foodId = form.req_foodId.value;
+      const req_donorName = form.req_donorName.value;
+      const req_donorEmail = form.req_donorEmail.value;
+      const req_email = form.req_email.value;
+      const req_date = form.req_date.value;
+      const req_additionalNotes = form.req_additionalNotes.value;
+
+      const requestedFood = {
+         req_foodName,
+         req_foodImage,
+         req_pickupLocation,
+         req_expiredDate,
+         req_foodId,
+         req_donorName,
+         req_donorEmail,
+         req_email,
+         req_date,
+         req_additionalNotes,
+      };
+
       // Perform request handling logic here
-      console.log("Request made!", foodName);
-      alert("request made");
-      handleCloseModal(); // Close modal after request is made
+      // Tanstack (3)
+      try {
+         await mutateAsync(requestedFood);
+      } catch (error) {
+         console.log("Error submitting food:", error);
+      }
+
+      // Close modal after request is made
+
+      form.reset();
+      handleCloseModal();
    };
 
    return (
@@ -344,10 +393,10 @@ const FoodDetails = () => {
 
                         <button
                            type="submit"
-                           className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
+                           className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange mt-6"
                         >
                            <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
-                           <span className="relative">Request</span>
+                           <span className="relative">Make Request</span>
                         </button>
                      </form>
                   </div>
