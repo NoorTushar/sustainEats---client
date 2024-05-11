@@ -1,27 +1,41 @@
-import { useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+// React-Hook-Form: (1)
+import { Controller, useForm } from "react-hook-form";
 
 const AddFood = () => {
    const { user } = useAuth();
-   const [startDate, setStartDate] = useState(new Date());
 
-   const handleAddFood = (e) => {
-      e.preventDefault();
+   // React-Hook-Form: (2a)
+   const {
+      control,
+      register,
+      handleSubmit,
+      getValues,
+      reset,
+      formState: { errors },
+   } = useForm({
+      defaultValues: {
+         donorName: `${user?.displayName}`,
+         donorImage: `${user?.photoURL}`,
+         donorEmail: `${user?.email}`,
+      },
+   });
 
-      const form = e.target;
-      const foodName = form.foodName.value;
-      const foodImage = form.foodImage.value;
-      const foodQuantity = form.foodQuantity.value;
-      const pickupLocation = form.pickupLocation.value;
-      const expiredDate = form.expiredDate.value;
-      const additionalNotes = form.additionalNotes.value;
-      const foodStatus = form.foodStatus.value;
+   // React-Hook-Form: (2b)
+   const onSubmit = async () => {
+      const foodName = getValues("foodName");
+      const foodImage = getValues("foodImage");
+      const foodQuantity = getValues("foodQuantity");
+      const pickupLocation = getValues("pickupLocation");
+      const expiredDate = getValues("expiredDate");
+      const additionalNotes = getValues("additionalNotes");
+      const foodStatus = getValues("foodStatus");
       const donor = {
-         donorImage: form.donorImage.value,
-         donorName: form.donorName.value,
-         donorEmail: form.donorEmail.value,
+         donorName: getValues("donorName"),
+         donorImage: getValues("donorImage"),
+         donorEmail: getValues("donorEmail"),
       };
 
       console.log({
@@ -34,6 +48,8 @@ const AddFood = () => {
          foodStatus,
          donor,
       });
+
+      reset();
    };
 
    return (
@@ -53,7 +69,7 @@ const AddFood = () => {
                Add Food
             </h2>
 
-            <form onSubmit={handleAddFood}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                   {/* foodName */}
                   <div>
@@ -64,11 +80,22 @@ const AddFood = () => {
                         Food Name
                      </label>
                      <input
+                        {...register("foodName", {
+                           required: {
+                              value: true,
+                              message: "Must provide an foodName",
+                           },
+                        })}
                         id="foodName"
                         name="foodName"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
+                     {errors?.foodName && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.foodName.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* foodImage */}
@@ -80,11 +107,22 @@ const AddFood = () => {
                         Food Image
                      </label>
                      <input
+                        {...register("foodImage", {
+                           required: {
+                              value: true,
+                              message: "Must provide a foodImage",
+                           },
+                        })}
                         id="foodImage"
                         name="foodImage"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
+                     {errors?.foodImage && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.foodImage.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* foodQuantity */}
@@ -96,11 +134,22 @@ const AddFood = () => {
                         Food Quantity
                      </label>
                      <input
+                        {...register("foodQuantity", {
+                           required: {
+                              value: true,
+                              message: "Must provide a foodQuantity",
+                           },
+                        })}
                         id="foodQuantity"
                         name="foodQuantity"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
+                     {errors?.foodQuantity && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.foodQuantity.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* pickupLocation */}
@@ -112,23 +161,43 @@ const AddFood = () => {
                         Pickup Location
                      </label>
                      <input
+                        {...register("pickupLocation", {
+                           required: {
+                              value: true,
+                              message: "Must provide a pickupLocation",
+                           },
+                        })}
                         id="pickupLocation"
                         name="pickupLocation"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
+                     {errors?.pickupLocation && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.pickupLocation.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* expiredDate */}
                   <div>
-                     <p className="text-gray-700 dark:text-gray-200">
+                     <label
+                        htmlFor="expiredDate"
+                        className="text-gray-700 dark:text-gray-200 block"
+                     >
                         Expired Date
-                     </p>
-                     <DatePicker
+                     </label>
+                     <Controller
+                        control={control}
                         name="expiredDate"
-                        selected={startDate}
-                        onChange={(date) => setStartDate(date)}
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        rules={{ required: "Expired Date is required" }}
+                        render={({ field }) => (
+                           <DatePicker
+                              selected={field.value}
+                              onChange={(date) => field.onChange(date)}
+                              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                           />
+                        )}
                      />
                   </div>
 
@@ -141,11 +210,22 @@ const AddFood = () => {
                         Additional Notes
                      </label>
                      <input
+                        {...register("additionalNotes", {
+                           required: {
+                              value: true,
+                              message: "Must provide a additionalNotes",
+                           },
+                        })}
                         id="additionalNotes"
                         name="additionalNotes"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
+                     {errors?.additionalNotes && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.additionalNotes.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* foodStatus */}
@@ -157,12 +237,22 @@ const AddFood = () => {
                         Food Status
                      </label>
                      <input
-                        defaultValue={"Available"}
+                        {...register("foodStatus", {
+                           required: {
+                              value: true,
+                              message: "Must provide a foodStatus",
+                           },
+                        })}
                         id="foodStatus"
                         name="foodStatus"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
+                     {errors?.foodStatus && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.foodStatus.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* donorImage */}
@@ -174,13 +264,23 @@ const AddFood = () => {
                         Donor Image
                      </label>
                      <input
-                        defaultValue={user?.photoURL}
+                        {...register("donorImage", {
+                           required: {
+                              value: true,
+                              message: "Must provide a donorImage",
+                           },
+                        })}
                         disabled={true}
                         id="donorImage"
                         name="donorImage"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
+                     {errors?.donorImage && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.donorImage.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* donorName */}
@@ -192,13 +292,23 @@ const AddFood = () => {
                         Donor Name
                      </label>
                      <input
-                        defaultValue={user?.displayName}
-                        disabled={true}
+                        {...register("donorName", {
+                           required: {
+                              value: true,
+                              message: "Must provide a donorName",
+                           },
+                        })}
+                        disabled
                         id="donorName"
                         name="donorName"
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
+                     {errors?.donorName && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.donorName.message}
+                        </span>
+                     )}
                   </div>
 
                   {/* donorEmail */}
@@ -210,6 +320,12 @@ const AddFood = () => {
                         Donor Email
                      </label>
                      <input
+                        {...register("donorEmail", {
+                           required: {
+                              value: true,
+                              message: "Must provide a donorEmail",
+                           },
+                        })}
                         defaultValue={user?.email}
                         disabled={true}
                         id="donorEmail"
@@ -217,6 +333,11 @@ const AddFood = () => {
                         type="text"
                         className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
+                     {errors?.donorEmail && (
+                        <span className="text-red-500 block mt-1 mb-2 font-didact">
+                           {errors.donorEmail.message}
+                        </span>
+                     )}
                   </div>
                </div>
 

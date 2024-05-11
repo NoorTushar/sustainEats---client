@@ -5,6 +5,7 @@ import ErrorPage from "../Pages/ErrorPage";
 import Login from "../Pages/Login/Login";
 import Registration from "../Pages/Registration/Registration";
 import AddFood from "../Pages/AddFood/AddFood";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
    {
@@ -26,7 +27,11 @@ export const router = createBrowserRouter([
          },
          {
             path: "/add-food",
-            element: <AddFood></AddFood>,
+            element: (
+               <PrivateRoute>
+                  <AddFood></AddFood>
+               </PrivateRoute>
+            ),
          },
       ],
    },
