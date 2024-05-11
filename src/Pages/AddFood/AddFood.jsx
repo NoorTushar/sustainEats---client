@@ -4,6 +4,8 @@ import "react-datepicker/dist/react-datepicker.css";
 // React-Hook-Form: (1)
 import { Controller, useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+// Tanstack (1)
+import { useMutation } from "@tanstack/react-query";
 
 const AddFood = () => {
    const { user } = useAuth();
@@ -25,7 +27,22 @@ const AddFood = () => {
       },
    });
 
+   // Tanstack (2)
+   // tanstack mutation to add food to db
+   // aikhane amader food jehutu pathaite hobe so food ta lagbe
+   // food ta amra bahirer thike anbo using mutateAsync()
+   const { mutateAsync } = useMutation({
+      mutationFn: async (food) => {
+         const result = await axiosSecure.post("/foods", food);
+         console.log(result.data);
+      },
+      onSuccess: () => {
+         alert("food submitted");
+      },
+   });
+
    // React-Hook-Form: (2b)
+   // er bhitore mutateAsync function use korbo tanstack mutationFn e pathanor jonne
    const onSubmit = async () => {
       const foodName = getValues("foodName");
       const foodImage = getValues("foodImage");
@@ -53,11 +70,11 @@ const AddFood = () => {
 
       console.log(food);
 
+      // Tanstack (3)
       try {
-         const result = await axiosSecure.post("/foods", food);
-         console.log(result.data);
+         await mutateAsync(food);
       } catch (error) {
-         console.log(error);
+         console.log("Error submitting food:", error);
       }
 
       reset();
