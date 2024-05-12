@@ -37,40 +37,52 @@ const Registration = () => {
 
       console.log(userName, email, password, photoURL);
 
-      // create user imported from AuthContext
-      try {
-         await createUser(email, password);
-         await updateUser(userName, photoURL);
+      // Show confirmation dialog
+      const confirmationResult = await Swal.fire({
+         title: "Confirm?",
+         text: "Have you put everything correctly?",
+         icon: "question",
+         showCancelButton: true,
+         confirmButtonText: "Yes, register my account",
+         cancelButtonText: "No, wait",
+      });
 
-         // have to set loading to false else after
-         // redirecting to page, it will keep showing the loader
-         setLoading(false);
-         reset();
-         Swal.fire({
-            title: "Success!",
-            text: "Registration Successful!",
-            icon: "success",
-            confirmButtonText: "Ok",
-         });
+      if (confirmationResult.isConfirmed) {
+         // create user imported from AuthContext
+         try {
+            await createUser(email, password);
+            await updateUser(userName, photoURL);
 
-         // navigate to private route or homepage
-         navigate(location?.state || "/");
-      } catch (error) {
-         console.log(error);
-         const errorMessage = error.message
-            .split("Firebase: Error (auth/")[1]
-            .split(")")[0]
-            .replace(/-/g, " ");
+            // have to set loading to false else after
+            // redirecting to page, it will keep showing the loader
+            setLoading(false);
+            reset();
+            Swal.fire({
+               title: "Success!",
+               text: "Registration Successful!",
+               icon: "success",
+               confirmButtonText: "Ok",
+            });
 
-         Swal.fire({
-            title: "Failure!",
-            text: `${errorMessage}`,
-            icon: "error",
-            width: 600,
-            color: "#A65F3F",
-            background: "",
-            confirmButtonText: "Ok",
-         });
+            // navigate to private route or homepage
+            navigate(location?.state || "/");
+         } catch (error) {
+            console.log(error);
+            const errorMessage = error.message
+               .split("Firebase: Error (auth/")[1]
+               .split(")")[0]
+               .replace(/-/g, " ");
+
+            Swal.fire({
+               title: "Failure!",
+               text: `${errorMessage}`,
+               icon: "error",
+               width: 600,
+               color: "#A65F3F",
+               background: "",
+               confirmButtonText: "Ok",
+            });
+         }
       }
    };
 

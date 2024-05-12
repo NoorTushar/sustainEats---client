@@ -71,24 +71,34 @@ const AddFood = () => {
 
       console.log(food);
 
-      // Tanstack (3)
-      try {
-         await mutateAsync(food);
+      // Show confirmation dialog
+      const confirmationResult = await Swal.fire({
+         title: "Confirm?",
+         text: "Have you put everything correctly?",
+         icon: "question",
+         showCancelButton: true,
+         confirmButtonText: "Yes, add it",
+         cancelButtonText: "No, cancel",
+      });
 
-         Swal.fire({
-            title: "Food Added Successfully!",
-            text: "Thank you for your contribution",
-            icon: "success",
+      if (confirmationResult.isConfirmed) {
+         // Tanstack (3)
+         try {
+            await mutateAsync(food);
 
-            confirmButtonText: "Ok",
-         });
+            Swal.fire({
+               title: "Food Added Successfully!",
+               text: "Thank you for your contribution",
+               icon: "success",
 
-         navigate("/my-added-foods");
-      } catch (error) {
-         console.log("Error submitting food:", error);
+               confirmButtonText: "Ok",
+            });
+            reset();
+            navigate("/my-added-foods");
+         } catch (error) {
+            console.log("Error submitting food:", error);
+         }
       }
-
-      reset();
    };
 
    return (

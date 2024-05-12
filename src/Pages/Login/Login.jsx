@@ -90,6 +90,20 @@ const Login = () => {
          navigate(location?.state || "/");
       } catch (error) {
          console.log(error);
+         const errorMessage = error.message
+            .split("Firebase: Error (auth/")[1]
+            .split(")")[0]
+            .replace(/-/g, " ");
+
+         Swal.fire({
+            title: "Failure!",
+            text: `${errorMessage}`,
+            icon: "error",
+            width: 600,
+            color: "#A65F3F",
+            background: "",
+            confirmButtonText: "Ok",
+         });
       }
    };
 

@@ -1,10 +1,12 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Triangle } from "react-loader-spinner";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const FoodDetails = () => {
+   const navigate = useNavigate();
    // food id nicchi jeita diye data fetch and pore update korbo
    const foodId = useParams().id;
    // user lagbe cause pore user er email ta request food er jonne lagbe
@@ -40,10 +42,22 @@ const FoodDetails = () => {
          console.log(result.data);
       },
       onSuccess: () => {
-         alert("tan stack alert - request success");
+         Swal.fire({
+            title: "Success!",
+            text: "Food Requested Successfully",
+            icon: "success",
+            confirmButtonText: "Ok",
+         });
+
+         navigate("/");
       },
       onError: () => {
-         alert(error.message);
+         Swal.fire({
+            title: "Failed!",
+            text: `Food Requested Failed: ${error}`,
+            icon: "success",
+            confirmButtonText: "Ok",
+         });
          console.log(error);
       },
    });

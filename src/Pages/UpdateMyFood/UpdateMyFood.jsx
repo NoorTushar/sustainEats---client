@@ -83,33 +83,39 @@ const UpdateMyFood = () => {
          foodStatus,
       };
 
-      console.log("foood data to be updated:  ->", food);
+      // Show confirmation dialog
+      const confirmationResult = await Swal.fire({
+         title: "Update Food",
+         text: "Are you sure you want to update this food?",
+         icon: "question",
+         showCancelButton: true,
+         confirmButtonText: "Yes, update it",
+         cancelButtonText: "No, cancel",
+      });
 
-      // Tanstack (3)
-      try {
-         await mutateAsync(food);
+      // If user confirms, update the food
+      if (confirmationResult.isConfirmed) {
+         try {
+            await mutateAsync(food);
 
-         refetch();
+            refetch();
 
-         Swal.fire({
-            title: "Food Updated Successfully!",
-            text: "Thank you for your contribution",
-            icon: "success",
+            Swal.fire({
+               title: "Food Updated Successfully!",
+               text: "Thank you for your contribution",
+               icon: "success",
+               confirmButtonText: "Ok",
+            });
 
-            confirmButtonText: "Ok",
-         });
-
-         navigate("/my-added-foods");
-      } catch (error) {
-         console.log("Error submitting food:", error);
-
-         Swal.fire({
-            title: "Error Updating!",
-            text: `Food was not updated: ${error}`,
-            icon: "error",
-
-            confirmButtonText: "Ok",
-         });
+            navigate("/my-added-foods");
+         } catch (error) {
+            Swal.fire({
+               title: "Error Updating!",
+               text: `Food was not updated: ${error}`,
+               icon: "error",
+               confirmButtonText: "Ok",
+            });
+         }
       }
    };
 
@@ -118,6 +124,19 @@ const UpdateMyFood = () => {
       mutationFn: async (food) => {
          console.log(`hi from tanstack`, food);
          const result = await axiosSecure.put(
+            `${import.meta.env.VITE_API_URL}/food/${foodId}`,
+            food
+         );
+
+         return result.data;
+      },
+   });
+
+   // tantack delete method
+   const { mutateAsync: deleteMutateAsync } = useMutation({
+      mutationFn: async (food) => {
+         console.log(`hi from tanstack`, food);
+         const result = await axiosSecure.delete(
             `${import.meta.env.VITE_API_URL}/food/${foodId}`,
             food
          );
