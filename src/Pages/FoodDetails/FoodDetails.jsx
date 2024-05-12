@@ -25,7 +25,9 @@ const FoodDetails = () => {
          //  must return the result
          return result.data;
       },
-      queryKey: ["food"],
+      // important foodId ta aikhane deya as foodId change hoile abar
+      // queryFn ta run hobe and updated data fetch korbe
+      queryKey: ["food", foodId],
    });
 
    // tanstack for POST method (1): creating a food request
