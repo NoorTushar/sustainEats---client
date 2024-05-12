@@ -132,19 +132,6 @@ const UpdateMyFood = () => {
       },
    });
 
-   // tantack delete method
-   const { mutateAsync: deleteMutateAsync } = useMutation({
-      mutationFn: async (food) => {
-         console.log(`hi from tanstack`, food);
-         const result = await axiosSecure.delete(
-            `${import.meta.env.VITE_API_URL}/food/${foodId}`,
-            food
-         );
-
-         return result.data;
-      },
-   });
-
    // tanstack query for GET Method (2) : data load howa porjonto akta loader dekhabo
    if (isLoading) {
       return (

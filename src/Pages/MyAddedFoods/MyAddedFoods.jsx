@@ -1,15 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Triangle } from "react-loader-spinner";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyAddedFoods = () => {
    const axiosSecure = useAxiosSecure();
    const { user } = useAuth();
    const searchEmail = user?.email;
 
-   const { data: myAddedFoods = [], isLoading } = useQuery({
+   const {
+      data: myAddedFoods = [],
+      isLoading,
+      refetch,
+   } = useQuery({
       queryFn: () => getAddedFoods(),
       queryKey: ["myAddedFoods", searchEmail],
    });
@@ -20,6 +25,52 @@ const MyAddedFoods = () => {
       );
 
       return result.data;
+   };
+
+   // tantack delete method
+   const { mutateAsync: deleteMutateAsync } = useMutation({
+      mutationFn: async (foodId) => {
+         console.log(`hi from tanstack`);
+         const result = await axiosSecure.delete(
+            `${import.meta.env.VITE_API_URL}/food/${foodId}`
+         );
+
+         return result.data;
+      },
+   });
+
+   const handleDeleteFood = async (foodId) => {
+      const confirmationResult = await Swal.fire({
+         title: "Delete Food",
+         text: "Are you sure you want to delete this food?",
+         icon: "question",
+         showCancelButton: true,
+         confirmButtonText: "Yes, delete it",
+         cancelButtonText: "No, cancel",
+      });
+
+      // If user confirms, update the food
+      if (confirmationResult.isConfirmed) {
+         try {
+            await deleteMutateAsync(foodId);
+
+            refetch();
+
+            Swal.fire({
+               title: "Food Deleted Successfully!",
+               text: "Hoping to see you contribute soon again.",
+               icon: "success",
+               confirmButtonText: "Ok",
+            });
+         } catch (error) {
+            Swal.fire({
+               title: "Error Updating!",
+               text: `Food was not updated: ${error}`,
+               icon: "error",
+               confirmButtonText: "Ok",
+            });
+         }
+      }
    };
 
    if (isLoading) {
@@ -38,7 +89,6 @@ const MyAddedFoods = () => {
       );
    }
 
-   console.log(myAddedFoods);
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
          {/* title */}
@@ -187,7 +237,12 @@ const MyAddedFoods = () => {
                                        <td className="px-4 py-4 text-sm whitespace-nowrap">
                                           <div className="flex items-center gap-x-6">
                                              {/* delete button */}
-                                             <button className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
+                                             <button
+                                                onClick={() =>
+                                                   handleDeleteFood(food._id)
+                                                }
+                                                className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
+                                             >
                                                 <svg
                                                    xmlns="http://www.w3.org/2000/svg"
                                                    fill="none"
