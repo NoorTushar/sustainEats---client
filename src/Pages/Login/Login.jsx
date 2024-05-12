@@ -5,12 +5,23 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 // React-Hook-Form: (1)
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
    const { loginWithGoogle, loginUser } = useAuth();
+
+   // after login correct redirection (3)
+   // first we will get the location of the current page
+   const location = useLocation();
+
+   // after login correct redirection (4)
+   const navigate = useNavigate();
+
+   // after login correct redirection (5)
+   // we want to send this path to the registration state props
+   const locationState = location.state;
 
    // React-Hook-Form: (2a)
    const {
@@ -39,6 +50,9 @@ const Login = () => {
             icon: "success",
             confirmButtonText: "Ok",
          });
+
+         // after login correct redirection (6)
+         navigate(location?.state || "/");
       } catch (error) {
          console.log(error);
          const errorMessage = error.message
@@ -71,6 +85,9 @@ const Login = () => {
 
             confirmButtonText: "Ok",
          });
+
+         // after login correct redirection (6)
+         navigate(location?.state || "/");
       } catch (error) {
          console.log(error);
       }
@@ -238,8 +255,9 @@ const Login = () => {
 
             <div className="flex items-center justify-between mt-4">
                <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
-
+               {/* // after registration correct redirection - (7) */}
                <Link
+                  state={locationState}
                   to={"/registration"}
                   className="text-xs text-gray-500 uppercase dark:text-gray-400 hover:underline"
                >

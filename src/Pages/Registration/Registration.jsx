@@ -5,12 +5,20 @@ import { IoMdEyeOff, IoMdEye } from "react-icons/io";
 // React-Hook-Form: (1)
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Registration = () => {
    // toggle show/ hide password - (1)
    const [showPassword, setShowPassword] = useState(false);
+
    const { loginWithGoogle, createUser, updateUser, setLoading } = useAuth();
+
+   // after registration correct redirection - (3)
+   const location = useLocation();
+
+   // after registration correct redirection - (4)
+   const navigate = useNavigate();
+
    // React-Hook-Form: (2a)
    const {
       register,
@@ -44,6 +52,9 @@ const Registration = () => {
             icon: "success",
             confirmButtonText: "Ok",
          });
+
+         // navigate to private route or homepage
+         navigate(location?.state || "/");
       } catch (error) {
          console.log(error);
          const errorMessage = error.message
