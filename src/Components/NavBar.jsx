@@ -17,9 +17,14 @@ const NavBar = () => {
          </li>
 
          {user?.email && (
-            <li>
-               <Link to={"/add-food"}>Add Food</Link>
-            </li>
+            <>
+               <li>
+                  <Link to={"/add-food"}>Add Food</Link>
+               </li>
+               <li>
+                  <Link to={"/my-added-foods"}>My Added Foods</Link>
+               </li>
+            </>
          )}
       </>
    );
