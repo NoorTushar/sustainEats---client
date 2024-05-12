@@ -103,6 +103,7 @@ const AddFood = () => {
             <h2 className="text-lg font-semibold text-ourPrimary capitalize ">
                Add Food
             </h2>
+            <div className="h-[1.5px] bg-ourOrange w-20"></div>
 
             <form onSubmit={handleSubmit(onSubmit)}>
                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
