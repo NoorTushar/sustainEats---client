@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Triangle } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 const MyAddedFoods = () => {
    const axiosSecure = useAxiosSecure();
@@ -144,9 +145,29 @@ const MyAddedFoods = () => {
                                        </td>
                                        <td className="px-9 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
                                           <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
-                                             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                             <span
+                                                className={`h-1.5 w-1.5 rounded-full ${
+                                                   food.foodStatus ===
+                                                      "Available" &&
+                                                   "bg-emerald-500"
+                                                } ${
+                                                   food.foodStatus ===
+                                                      "Requested" &&
+                                                   "bg-yellow-500"
+                                                }`}
+                                             ></span>
 
-                                             <h2 className="text-sm font-normal text-emerald-500">
+                                             <h2
+                                                className={`text-sm font-normal ${
+                                                   food.foodStatus ===
+                                                      "Available" &&
+                                                   "text-emerald-500"
+                                                } ${
+                                                   food.foodStatus ===
+                                                      "Requested" &&
+                                                   "text-yellow-500"
+                                                } `}
+                                             >
                                                 {food.foodStatus}
                                              </h2>
                                           </div>
@@ -165,6 +186,7 @@ const MyAddedFoods = () => {
 
                                        <td className="px-4 py-4 text-sm whitespace-nowrap">
                                           <div className="flex items-center gap-x-6">
+                                             {/* delete button */}
                                              <button className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none">
                                                 <svg
                                                    xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +204,11 @@ const MyAddedFoods = () => {
                                                 </svg>
                                              </button>
 
-                                             <button className="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none">
+                                             {/* update button */}
+                                             <Link
+                                                to={`/updateFood/${food._id}`}
+                                                className="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none"
+                                             >
                                                 <svg
                                                    xmlns="http://www.w3.org/2000/svg"
                                                    fill="none"
@@ -197,7 +223,7 @@ const MyAddedFoods = () => {
                                                       d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
                                                    />
                                                 </svg>
-                                             </button>
+                                             </Link>
                                           </div>
                                        </td>
                                     </tr>

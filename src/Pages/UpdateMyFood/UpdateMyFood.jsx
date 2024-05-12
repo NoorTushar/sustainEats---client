@@ -1,46 +1,67 @@
-import useAuth from "../../Hooks/useAuth";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-// React-Hook-Form: (1)
-import { Controller, useForm } from "react-hook-form";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { Triangle } from "react-loader-spinner";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-// Tanstack (1)
-import { useMutation } from "@tanstack/react-query";
+import { Controller, useForm } from "react-hook-form";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
-const AddFood = () => {
-   const { user } = useAuth();
-   const axiosSecure = useAxiosSecure();
+const UpdateMyFood = () => {
    const navigate = useNavigate();
+   // food id nicchi jeita diye data fetch and pore update korbo
+   const foodId = useParams().id;
 
+   const axiosSecure = useAxiosSecure();
+
+   // tanstack query for GET Method (1) : id er against e data load korbo
+   // steps:
+   // 1 - useQuery()
+   // 2 - data and oitar akta name dibo and initially ki object naki array.
+   // 3 - queryFn: async function diye data load and return the data
+   // 4 - queryKey
+   const {
+      data: food = {},
+      isLoading,
+      refetch,
+   } = useQuery({
+      queryFn: async () => {
+         const result = await axiosSecure(
+            `${import.meta.env.VITE_API_URL}/food/${foodId}`
+         );
+         console.log(result.data);
+         //  must return the result
+         return result.data;
+      },
+      // important foodId ta aikhane deya as foodId change hoile abar
+      // queryFn ta run hobe and updated data fetch korbe
+      queryKey: ["food", foodId],
+   });
+
+   const {
+      foodName,
+      foodImage,
+      foodQuantity,
+      pickupLocation,
+      expiredDate,
+      additionalNotes,
+
+      foodStatus,
+   } = food;
+
+   const parsedExpiredDate = food?.expiredDate
+      ? new Date(food.expiredDate)
+      : null;
+
+   console.log(expiredDate);
    // React-Hook-Form: (2a)
    const {
       control,
       register,
       handleSubmit,
       getValues,
-      reset,
       formState: { errors },
-   } = useForm({
-      defaultValues: {
-         donorName: `${user?.displayName}`,
-         donorImage: `${user?.photoURL}`,
-         donorEmail: `${user?.email}`,
-         foodStatus: "Available",
-      },
-   });
-
-   // Tanstack (2)
-   // tanstack mutation to add food to db
-   // aikhane amader food jehutu pathaite hobe so food ta lagbe
-   // food ta amra bahirer thike anbo using mutateAsync()
-   const { mutateAsync } = useMutation({
-      mutationFn: async (food) => {
-         const result = await axiosSecure.post("/foods", food);
-         console.log(result.data);
-      },
-   });
+   } = useForm();
 
    // React-Hook-Form: (2b)
    // er bhitore mutateAsync function use korbo tanstack mutationFn e pathanor jonne
@@ -51,12 +72,6 @@ const AddFood = () => {
       const pickupLocation = getValues("pickupLocation");
       const expiredDate = getValues("expiredDate");
       const additionalNotes = getValues("additionalNotes");
-      const foodStatus = getValues("foodStatus");
-      const donor = {
-         donorName: getValues("donorName"),
-         donorImage: getValues("donorImage"),
-         donorEmail: getValues("donorEmail"),
-      };
 
       const food = {
          foodName,
@@ -66,17 +81,18 @@ const AddFood = () => {
          expiredDate,
          additionalNotes,
          foodStatus,
-         donor,
       };
 
-      console.log(food);
+      console.log("foood data to be updated:  ->", food);
 
       // Tanstack (3)
       try {
          await mutateAsync(food);
 
+         refetch();
+
          Swal.fire({
-            title: "Food Added Successfully!",
+            title: "Food Updated Successfully!",
             text: "Thank you for your contribution",
             icon: "success",
 
@@ -86,18 +102,55 @@ const AddFood = () => {
          navigate("/my-added-foods");
       } catch (error) {
          console.log("Error submitting food:", error);
-      }
 
-      reset();
+         Swal.fire({
+            title: "Error Updating!",
+            text: `Food was not updated: ${error}`,
+            icon: "error",
+
+            confirmButtonText: "Ok",
+         });
+      }
    };
+
+   // tantack put method
+   const { mutateAsync } = useMutation({
+      mutationFn: async (food) => {
+         console.log(`hi from tanstack`, food);
+         const result = await axiosSecure.put(
+            `${import.meta.env.VITE_API_URL}/food/${foodId}`,
+            food
+         );
+         console.log(result.data);
+      },
+   });
+
+   // tanstack query for GET Method (2) : data load howa porjonto akta loader dekhabo
+   if (isLoading) {
+      return (
+         <div className="min-h-[calc(100vh-392px)] flex items-center justify-center">
+            <Triangle
+               visible={true}
+               height="80"
+               width="80"
+               color="#009368"
+               ariaLabel="triangle-loading"
+               wrapperStyle={{}}
+               wrapperClass=""
+            />
+         </div>
+      );
+   }
 
    return (
       <div className="mt-[68px]">
          {/* title */}
          <div className="text-center mb-6">
-            <p className="text-xl font-semibold text-ourPrimary">Welcome</p>
+            <p className="text-xl font-semibold text-ourPrimary">
+               Welcome Again Hero
+            </p>
             <h2 className="text-[40px] font-semibold mt-1">
-               You Can Help Lots of People by Adding Little
+               Want to update anything?
             </h2>
             <div className="bg-ourOrange h-[2px] w-16 mx-auto mt-3"></div>
          </div>
@@ -105,7 +158,7 @@ const AddFood = () => {
          {/* form */}
          <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
             <h2 className="text-lg font-semibold text-ourPrimary capitalize ">
-               Add Food
+               Update Food
             </h2>
             <div className="h-[1.5px] bg-ourOrange w-20"></div>
 
@@ -126,6 +179,7 @@ const AddFood = () => {
                               message: "Must provide an foodName",
                            },
                         })}
+                        defaultValue={foodName}
                         id="foodName"
                         name="foodName"
                         type="text"
@@ -153,6 +207,7 @@ const AddFood = () => {
                               message: "Must provide a foodImage",
                            },
                         })}
+                        defaultValue={foodImage}
                         id="foodImage"
                         name="foodImage"
                         type="text"
@@ -180,6 +235,7 @@ const AddFood = () => {
                               message: "Must provide a foodQuantity",
                            },
                         })}
+                        defaultValue={foodQuantity}
                         id="foodQuantity"
                         name="foodQuantity"
                         type="text"
@@ -207,6 +263,7 @@ const AddFood = () => {
                               message: "Must provide a pickupLocation",
                            },
                         })}
+                        defaultValue={pickupLocation}
                         id="pickupLocation"
                         name="pickupLocation"
                         type="text"
@@ -231,6 +288,7 @@ const AddFood = () => {
                         control={control}
                         name="expiredDate"
                         rules={{ required: "Expired Date is required" }}
+                        defaultValue={parsedExpiredDate} // Set defaultValue instead of defaultValues
                         render={({ field }) => (
                            <DatePicker
                               selected={field.value}
@@ -239,11 +297,6 @@ const AddFood = () => {
                            />
                         )}
                      />
-                     {errors?.expiredDate && (
-                        <span className="text-red-500 block mt-1 mb-2 font-didact">
-                           {errors.expiredDate.message}
-                        </span>
-                     )}
                   </div>
 
                   {/* additionalNotes */}
@@ -261,6 +314,7 @@ const AddFood = () => {
                               message: "Must provide a additionalNotes",
                            },
                         })}
+                        defaultValue={additionalNotes}
                         id="additionalNotes"
                         name="additionalNotes"
                         type="text"
@@ -282,13 +336,9 @@ const AddFood = () => {
                         Food Status
                      </label>
                      <input
-                        {...register("foodStatus", {
-                           required: {
-                              value: true,
-                              message: "Must provide a foodStatus",
-                           },
-                        })}
+                        {...register("foodStatus")}
                         disabled
+                        defaultValue={foodStatus}
                         id="foodStatus"
                         name="foodStatus"
                         type="text"
@@ -302,7 +352,7 @@ const AddFood = () => {
                   </div>
 
                   {/* donorImage */}
-                  <div>
+                  {/* <div>
                      <label
                         className="text-gray-700 dark:text-gray-200"
                         htmlFor="donorImage"
@@ -327,10 +377,10 @@ const AddFood = () => {
                            {errors.donorImage.message}
                         </span>
                      )}
-                  </div>
+                  </div> */}
 
                   {/* donorName */}
-                  <div>
+                  {/* <div>
                      <label
                         className="text-gray-700 dark:text-gray-200"
                         htmlFor="donorName"
@@ -355,10 +405,10 @@ const AddFood = () => {
                            {errors.donorName.message}
                         </span>
                      )}
-                  </div>
+                  </div> */}
 
                   {/* donorEmail */}
-                  <div>
+                  {/* <div>
                      <label
                         className="text-gray-700 dark:text-gray-200"
                         htmlFor="donorEmail"
@@ -372,7 +422,6 @@ const AddFood = () => {
                               message: "Must provide a donorEmail",
                            },
                         })}
-                        defaultValue={user?.email}
                         disabled={true}
                         id="donorEmail"
                         name="donorEmail"
@@ -384,13 +433,13 @@ const AddFood = () => {
                            {errors.donorEmail.message}
                         </span>
                      )}
-                  </div>
+                  </div> */}
                </div>
 
                <div className="flex justify-center mt-6">
                   <button className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange">
                      <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-90"></span>
-                     <span className="relative">Add Food</span>
+                     <span className="relative">Update Food</span>
                   </button>
                </div>
             </form>
@@ -399,4 +448,4 @@ const AddFood = () => {
    );
 };
 
-export default AddFood;
+export default UpdateMyFood;
