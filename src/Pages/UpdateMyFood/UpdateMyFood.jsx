@@ -118,10 +118,11 @@ const UpdateMyFood = () => {
       mutationFn: async (food) => {
          console.log(`hi from tanstack`, food);
          const result = await axiosSecure.put(
-            `${import.meta.env.VITE_API_URL}/food/${foodId}`,
+            `${import.meta.env.VITE_API_URL}/foosdd/${foodId}`,
             food
          );
-         console.log(result.data);
+
+         return result.data;
       },
    });
 
