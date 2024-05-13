@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo_sustainEats.png";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
@@ -10,22 +10,24 @@ const NavBar = () => {
    const navItem = (
       <>
          <li>
-            <Link to={"/"}>Home</Link>
+            <NavLink to={"/"}>Home</NavLink>
          </li>
          <li>
-            <Link to={"/available-foods"}>Available Foods</Link>
+            <NavLink to={"/available-foods"}>Available Foods</NavLink>
          </li>
 
          {user?.email && (
             <>
                <li>
-                  <Link to={"/add-food"}>Add Food</Link>
+                  <NavLink to={"/add-food"}>Add Food</NavLink>
                </li>
                <li>
-                  <Link to={"/my-added-foods"}>My Added Foods</Link>
+                  <NavLink to={"/my-added-foods"}>My Added Foods</NavLink>
                </li>
                <li>
-                  <Link to={"/my-requested-foods"}>My Requested Foods</Link>
+                  <NavLink to={"/my-requested-foods"}>
+                     My Requested Foods
+                  </NavLink>
                </li>
             </>
          )}
