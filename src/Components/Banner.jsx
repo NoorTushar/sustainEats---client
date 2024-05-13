@@ -1,3 +1,9 @@
+import bg1 from "../assets/bg-1.jpg";
+import bg2 from "../assets/bg-2.jpg";
+import bg3 from "../assets/bg-3.jpg";
+
+import "./banner.css";
+
 // import Swiper bundle with all modules installed
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -22,7 +28,7 @@ const Banner = () => {
                clickable: true,
             }}
             autoplay={{
-               delay: 2500,
+               delay: 3500,
                disableOnInteraction: false,
             }}
             navigation={true}
@@ -30,15 +36,15 @@ const Banner = () => {
             className="mySwiper"
          >
             <SwiperSlide>
-               <Slide></Slide>
+               <Slide bgImg={bg1}></Slide>
             </SwiperSlide>
 
             <SwiperSlide>
-               <Slide></Slide>
+               <Slide bgImg={bg2}></Slide>
             </SwiperSlide>
 
             <SwiperSlide>
-               <Slide></Slide>
+               <Slide bgImg={bg3}></Slide>
             </SwiperSlide>
          </Swiper>
       </>

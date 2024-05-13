@@ -1,0 +1,24 @@
+.swiper-button-prev,
+.swiper-button-next {
+   color: goldenrod;
+
+   @media screen and (max-width: 767px) {
+      display: none;
+   }
+}
+
+.swiper-pagination-bullet {
+   background-color: goldenrod;
+   width: 20px;
+   height: 5px;
+   border-radius: 0;
+   -webkit-border-radius: 0;
+   -moz-border-radius: 0;
+   -ms-border-radius: 0;
+   -o-border-radius: 0;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets,
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+   bottom: 20px;
+}
