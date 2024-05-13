@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { Link } from "react-router-dom";
 import { Triangle } from "react-loader-spinner";
 
 const MyRequestedFoods = () => {
@@ -80,7 +79,7 @@ const MyRequestedFoods = () => {
                                        className="py-3.5 px-10 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
                                     >
                                        <div className="flex items-center gap-x-3">
-                                          <span>Name</span>
+                                          <span>Food Name</span>
                                        </div>
                                     </th>
 
