@@ -2,6 +2,7 @@ import FoodCard from "./FoodCard";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { Link } from "react-router-dom";
+import Title from "./Title/Title";
 
 const FeaturedFoods = () => {
    const axiosSecure = useAxiosSecure();
@@ -73,7 +74,9 @@ const FeaturedFoods = () => {
    console.log("foods", foods);
    return (
       <>
-         <h3>Featured Foods: {foods?.length}</h3>
+         {/* Title */}
+         <Title supTitle="Our Top Availabe" title="Featured Foods"></Title>
+
          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {foods?.map((food) => (
                <FoodCard key={food._id} food={food}></FoodCard>
@@ -82,9 +85,9 @@ const FeaturedFoods = () => {
          <div className="text-center my-6">
             <Link
                to={`/available-foods`}
-               className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-white text-ourBlack inline-block border border-ourOrange"
+               className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
             >
-               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-ourOrange group-hover:h-full opacity-90"></span>
+               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full "></span>
                <span className="relative">All Available Foods</span>
             </Link>
          </div>

@@ -266,8 +266,8 @@ const Login = () => {
 
                   <div className="mt-6">
                      {/* login button */}
-                     <button className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-white text-ourBlack inline-block w-full border border-ourOrange">
-                        <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-ourOrange group-hover:h-full opacity-90"></span>
+                     <button className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block w-full border border-ourOrange">
+                        <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full"></span>
                         <span className="relative ">Login</span>
                      </button>
                   </div>

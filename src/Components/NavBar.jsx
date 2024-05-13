@@ -3,6 +3,8 @@ import logo from "../assets/logo_sustainEats.png";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
 
+import "./NavBar.css";
+
 const NavBar = () => {
    const { user, logoutUser } = useAuth();
    const navigate = useNavigate();
@@ -10,7 +12,9 @@ const NavBar = () => {
    const navItem = (
       <>
          <li>
-            <NavLink to={"/"}>Home</NavLink>
+            <NavLink exact to={"/"}>
+               Home
+            </NavLink>
          </li>
          <li>
             <NavLink to={"/available-foods"}>Available Foods</NavLink>
@@ -116,15 +120,6 @@ const NavBar = () => {
                      className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
                   >
                      <li>
-                        <a className="justify-between">
-                           Profile
-                           <span className="badge">New</span>
-                        </a>
-                     </li>
-                     <li>
-                        <a>Settings</a>
-                     </li>
-                     <li>
                         <button onClick={handleLogOut}>Logout</button>
                      </li>
                   </ul>
@@ -132,9 +127,9 @@ const NavBar = () => {
             ) : (
                <Link
                   to={`/login`}
-                  className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-white text-ourBlack inline-block border border-ourOrange"
+                  className="px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
                >
-                  <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-ourOrange group-hover:h-full opacity-90"></span>
+                  <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-100"></span>
                   <span className="relative">Login</span>
                </Link>
             )}
