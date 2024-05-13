@@ -4,6 +4,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Triangle } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import Title from "../../Components/Title/Title";
 
 const MyAddedFoods = () => {
    const axiosSecure = useAxiosSecure();
@@ -92,13 +93,7 @@ const MyAddedFoods = () => {
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
          {/* title */}
-         <div className="text-center mb-6">
-            <p className="text-xl font-semibold text-ourPrimary">
-               Hero`s Contribution
-            </p>
-            <h2 className="text-[40px] font-semibold mt-1">My Added Foods</h2>
-            <div className="bg-ourOrange h-[2px] w-16 mx-auto mt-3"></div>
-         </div>
+         <Title title="My Added Foods" supTitle="Hero`s Contribution"></Title>
 
          {/* Table */}
          <div>

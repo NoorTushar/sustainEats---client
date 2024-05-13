@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import FoodCard from "../../Components/FoodCard";
+import Title from "../../Components/Title/Title";
 
 const AvailableFoods = () => {
    // using tanstack useQuery to get foods from database
@@ -66,13 +67,7 @@ const AvailableFoods = () => {
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
          {/* title */}
-         <div className="text-center mb-6">
-            <p className="text-xl font-semibold text-ourPrimary">
-               By Our Heroes
-            </p>
-            <h2 className="text-[40px] font-semibold mt-1">Available Foods</h2>
-            <div className="bg-ourOrange h-[2px] w-16 mx-auto mt-3"></div>
-         </div>
+         <Title supTitle="By Our Heroes" title="Available Foods"></Title>
 
          {/******** Foods Gallery ********/}
          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -8,6 +8,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import Title from "../../Components/Title/Title";
 
 const AddFood = () => {
    const { user } = useAuth();
@@ -110,13 +111,7 @@ const AddFood = () => {
    return (
       <div className="mt-[68px]">
          {/* title */}
-         <div className="text-center mb-6">
-            <p className="text-xl font-semibold text-ourPrimary">Welcome</p>
-            <h2 className="text-[40px] font-semibold mt-1">
-               You Can Help Lots of People by Adding Little
-            </h2>
-            <div className="bg-ourOrange h-[2px] w-16 mx-auto mt-3"></div>
-         </div>
+         <Title title="Be a Hero by Adding Little" supTitle="Welcome"></Title>
 
          {/* form */}
          <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">

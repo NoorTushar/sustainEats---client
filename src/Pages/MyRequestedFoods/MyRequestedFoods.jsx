@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Triangle } from "react-loader-spinner";
+import Title from "../../Components/Title/Title";
 
 const MyRequestedFoods = () => {
    const axiosSecure = useAxiosSecure();
@@ -42,11 +43,7 @@ const MyRequestedFoods = () => {
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
          {/* title */}
-         <div className="text-center mb-6">
-            <p className="text-xl font-semibold text-ourPrimary">Check Your</p>
-            <h2 className="text-[40px] font-semibold mt-1">Requested Foods</h2>
-            <div className="bg-ourOrange h-[2px] w-16 mx-auto mt-3"></div>
-         </div>
+         <Title supTitle="Check Your" title="Requested Foods"></Title>
 
          {/* Table */}
          <div>
