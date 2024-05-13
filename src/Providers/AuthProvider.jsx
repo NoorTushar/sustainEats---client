@@ -96,7 +96,7 @@ const AuthProvider = ({ children }) => {
       return () => {
          unsubscribe();
       };
-   }, []);
+   }, [axiosSecure, user?.email]);
 
    const allValues = {
       loading,

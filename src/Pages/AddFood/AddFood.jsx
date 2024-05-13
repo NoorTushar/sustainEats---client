@@ -97,6 +97,13 @@ const AddFood = () => {
             navigate("/my-added-foods");
          } catch (error) {
             console.log("Error submitting food:", error);
+            Swal.fire({
+               title: "Unsuccessful",
+               text: "Food could not be added.",
+               icon: "error",
+
+               confirmButtonText: "Ok",
+            });
          }
       }
    };
