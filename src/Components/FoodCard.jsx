@@ -22,7 +22,7 @@ const FoodCard = ({ food }) => {
          </figure>
          <div className="card-body">
             <h2 className="card-title">{foodName}</h2>
-            <p>Quantity: {foodQuantity}</p>
+            <p>Quantity: {foodQuantity} persons</p>
             <p>Expiry Date: {new Date(expiredDate).toLocaleDateString()}</p>
             <p>Pickup Location: {pickupLocation}</p>
             <p>Additional Notes: {additionalNotes}</p>

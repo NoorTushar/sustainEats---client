@@ -109,6 +109,18 @@ const FoodDetails = () => {
       const req_date = form.req_date.value;
       const req_additionalNotes = form.req_additionalNotes.value;
 
+      // Check if the donorEmail matches the user's email
+      if (req_donorEmail === req_email) {
+         handleCloseModal(); // Close the modal
+         Swal.fire({
+            title: "Error!",
+            text: "You cannot make a request for your own food.",
+            icon: "error",
+            confirmButtonText: "Ok",
+         });
+         return; // Stop further execution
+      }
+
       const requestedFood = {
          req_foodName,
          req_foodImage,
@@ -215,7 +227,7 @@ const FoodDetails = () => {
                            quantity:{" "}
                         </h3>
                         <p className=" capitalize leading-[25px] ">
-                           {foodQuantity}
+                           {foodQuantity} persons
                         </p>
                      </div>
 

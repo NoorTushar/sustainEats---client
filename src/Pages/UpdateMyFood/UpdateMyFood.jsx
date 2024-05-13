@@ -76,7 +76,7 @@ const UpdateMyFood = () => {
       const food = {
          foodName,
          foodImage,
-         foodQuantity,
+         foodQuantity: parseInt(foodQuantity),
          pickupLocation,
          expiredDate,
          additionalNotes,

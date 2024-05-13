@@ -61,7 +61,7 @@ const AddFood = () => {
       const food = {
          foodName,
          foodImage,
-         foodQuantity,
+         foodQuantity: parseInt(foodQuantity),
          pickupLocation,
          expiredDate,
          additionalNotes,
@@ -187,7 +187,7 @@ const AddFood = () => {
                         className="text-gray-700 dark:text-gray-200"
                         htmlFor="foodQuantity"
                      >
-                        Food Quantity
+                        Food Quantity (Persons)
                      </label>
                      <input
                         {...register("foodQuantity", {
