@@ -24,6 +24,9 @@ const NavBar = () => {
                <li>
                   <Link to={"/my-added-foods"}>My Added Foods</Link>
                </li>
+               <li>
+                  <Link to={"/my-requested-foods"}>My Requested Foods</Link>
+               </li>
             </>
          )}
       </>
