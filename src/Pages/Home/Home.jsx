@@ -1,9 +1,13 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "../../Components/Banner";
 import FeaturedFoods from "../../Components/FeaturedFoods";
 
 const Home = () => {
    return (
       <div>
+         <Helmet>
+            <title>SustainEats | Home</title>
+         </Helmet>
          <div className="mt-[68px]">
             <Banner></Banner>
          </div>

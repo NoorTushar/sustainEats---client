@@ -6,6 +6,7 @@ import { Controller, useForm } from "react-hook-form";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const UpdateMyFood = () => {
    const navigate = useNavigate();
@@ -151,6 +152,9 @@ const UpdateMyFood = () => {
 
    return (
       <div className="mt-[68px]">
+         <Helmet>
+            <title>SustainEats | Update Food</title>
+         </Helmet>
          {/* title */}
          <div className="text-center mb-6">
             <p className="text-xl font-semibold text-ourPrimary">

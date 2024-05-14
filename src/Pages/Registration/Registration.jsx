@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import registerBg from "../../assets/register_image.jpg";
 import Title from "../../Components/Title/Title";
+import { Helmet } from "react-helmet-async";
 
 const Registration = () => {
    // toggle show/ hide password - (1)
@@ -108,6 +109,9 @@ const Registration = () => {
    };
    return (
       <div className="mt-[68px]">
+         <Helmet>
+            <title>Register | SustainEats</title>
+         </Helmet>
          {/* title */}
          <Title supTitle="Join Us" title="Register"></Title>
 

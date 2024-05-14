@@ -5,6 +5,7 @@ import { Triangle } from "react-loader-spinner";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import Title from "../../Components/Title/Title";
+import { Helmet } from "react-helmet-async";
 
 const MyAddedFoods = () => {
    const axiosSecure = useAxiosSecure();
@@ -92,6 +93,9 @@ const MyAddedFoods = () => {
 
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
+         <Helmet>
+            <title>My Added Foods | SustainEats</title>
+         </Helmet>
          {/* title */}
          <Title title="My Added Foods" supTitle="Hero`s Contribution"></Title>
 

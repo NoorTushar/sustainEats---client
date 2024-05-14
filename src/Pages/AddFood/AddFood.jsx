@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Title from "../../Components/Title/Title";
+import { Helmet } from "react-helmet-async";
 
 const AddFood = () => {
    const { user } = useAuth();
@@ -110,6 +111,9 @@ const AddFood = () => {
 
    return (
       <div className="mt-[68px]">
+         <Helmet>
+            <title>Add Food | SustainEats</title>
+         </Helmet>
          {/* title */}
          <Title title="Be a Hero by Adding Little" supTitle="Welcome"></Title>
 

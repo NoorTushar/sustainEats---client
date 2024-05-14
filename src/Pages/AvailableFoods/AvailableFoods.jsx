@@ -3,17 +3,14 @@ import axios from "axios";
 import FoodCard from "../../Components/FoodCard";
 import Title from "../../Components/Title/Title";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const AvailableFoods = () => {
    const [searchText, setSearchText] = useState("");
    const [search, setSearch] = useState("");
    const [sort, setSort] = useState("");
    // using tanstack useQuery to get foods from database
-   const {
-      data: foods = [],
-      isLoading,
-      refetch,
-   } = useQuery({
+   const { data: foods = [], isLoading } = useQuery({
       queryFn: async () => {
          const result = await axios(
             `${
@@ -91,6 +88,9 @@ const AvailableFoods = () => {
 
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
+         <Helmet>
+            <title>Available Foods | SustainEats</title>
+         </Helmet>
          {/* title */}
          <Title supTitle="By Our Heroes" title="Available Foods"></Title>
 

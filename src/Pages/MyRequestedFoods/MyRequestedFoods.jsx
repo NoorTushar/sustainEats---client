@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { Triangle } from "react-loader-spinner";
 import Title from "../../Components/Title/Title";
+import { Helmet } from "react-helmet-async";
 
 const MyRequestedFoods = () => {
    const axiosSecure = useAxiosSecure();
@@ -42,6 +43,9 @@ const MyRequestedFoods = () => {
    console.log(myRequestedFoods);
    return (
       <div className="mt-[68px] max-w-1170px w-[90%] md:w-[82%] mx-auto">
+         <Helmet>
+            <title>My Requested Foods | SustainEats</title>
+         </Helmet>
          {/* title */}
          <Title supTitle="Check Your" title="Requested Foods"></Title>
 
