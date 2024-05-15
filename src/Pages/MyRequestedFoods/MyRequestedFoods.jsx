@@ -53,11 +53,11 @@ const MyRequestedFoods = () => {
          <div>
             <section className="container px-4 mx-auto">
                <div className="flex items-center gap-x-3">
-                  <h2 className="text-lg font-medium text-ourOrange">
+                  <h2 className="text-lg font-medium text-ourBlack">
                      Total Items
                   </h2>
 
-                  <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
+                  <span className="px-3 py-1 text-xs text-black bg-ourOrange rounded-full ">
                      {myRequestedFoods.length}
                   </span>
                </div>
@@ -65,19 +65,19 @@ const MyRequestedFoods = () => {
                <div className="flex flex-col mt-6">
                   <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                      <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                              <thead className="bg-gray-50 dark:bg-gray-800">
+                        <div className="overflow-hidden border border-ourPrimary  md:rounded-lg">
+                           <table className="min-w-full divide-y divide-ourPrimary ">
+                              <thead className="bg-ourPrimary ">
                                  <tr>
                                     <th
                                        scope="col"
-                                       className="px-3 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-3 py-3.5 text-sm font-normal text-center rtl:text-right text-white"
                                     >
                                        <span>Sl.No</span>
                                     </th>
                                     <th
                                        scope="col"
-                                       className="py-3.5 px-10 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="py-3.5 px-10 text-sm font-normal text-left rtl:text-right text-white"
                                     >
                                        <div className="flex items-center gap-x-3">
                                           <span>Food Name</span>
@@ -86,46 +86,46 @@ const MyRequestedFoods = () => {
 
                                     <th
                                        scope="col"
-                                       className="px-10 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-10 py-3.5 text-sm font-normal text-left rtl:text-right text-white"
                                     >
                                        <span>Food Id</span>
                                     </th>
 
                                     <th
                                        scope="col"
-                                       className="px-10 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-10 py-3.5 text-sm font-normal text-left rtl:text-right text-white"
                                     >
                                        <span>Donated By</span>
                                     </th>
 
                                     <th
                                        scope="col"
-                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white"
                                     >
                                        Request Date
                                     </th>
                                     <th
                                        scope="col"
-                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white"
                                     >
                                        Food Expiry Date
                                     </th>
 
                                     <th
                                        scope="col"
-                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white"
                                     >
                                        Pickup Location
                                     </th>
                                  </tr>
                               </thead>
-                              <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                              <tbody className="bg-white divide-y divide-ourPrimary  ">
                                  {myRequestedFoods.map((food, index) => (
                                     <tr key={food._id}>
-                                       <td className="px-3 py-3.5 text-center  text-sm font-medium text-gray-700 whitespace-nowrap">
+                                       <td className="px-3 py-3.5 text-center  text-sm font-medium text-black whitespace-nowrap">
                                           {index + 1}
                                        </td>
-                                       <td className="px-10 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                       <td className="px-10 py-4 text-sm font-medium text-black whitespace-nowrap">
                                           <div className="inline-flex items-center h-full gap-x-3">
                                              <div className="flex items-center gap-x-3 h-full">
                                                 <img
@@ -134,7 +134,7 @@ const MyRequestedFoods = () => {
                                                    alt={food.req_foodName}
                                                 />
                                                 <div>
-                                                   <h2 className="font-medium text-gray-800 dark:text-white ">
+                                                   <h2 className="font-medium text-gray-800  ">
                                                       {food.req_foodName}
                                                    </h2>
                                                 </div>
@@ -142,22 +142,22 @@ const MyRequestedFoods = () => {
                                           </div>
                                        </td>
 
-                                       <td className="px-10 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-10 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.req_foodId}
                                        </td>
 
-                                       <td className="px-10 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-10 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.req_donorName}
                                        </td>
-                                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.req_date}
                                        </td>
 
-                                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.req_expiredDate}
                                        </td>
 
-                                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.req_pickupLocation}
                                        </td>
                                     </tr>
