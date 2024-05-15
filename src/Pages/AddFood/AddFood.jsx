@@ -118,8 +118,8 @@ const AddFood = () => {
          <Title title="Be a Hero by Adding Little" supTitle="Welcome"></Title>
 
          {/* form */}
-         <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-            <h2 className="text-lg font-semibold text-ourPrimary capitalize ">
+         <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md ">
+            <h2 className="text-xl font-semibold text-ourPrimary capitalize ">
                Add Food
             </h2>
             <div className="h-[1.5px] bg-ourOrange w-20"></div>
@@ -128,10 +128,7 @@ const AddFood = () => {
                <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                   {/* foodName */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="foodName"
-                     >
+                     <label className="text-black " htmlFor="foodName">
                         Food Name
                      </label>
                      <input
@@ -144,7 +141,7 @@ const AddFood = () => {
                         id="foodName"
                         name="foodName"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
                      {errors?.foodName && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -155,10 +152,7 @@ const AddFood = () => {
 
                   {/* foodImage */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="foodImage"
-                     >
+                     <label className="text-black " htmlFor="foodImage">
                         Food Image
                      </label>
                      <input
@@ -171,7 +165,7 @@ const AddFood = () => {
                         id="foodImage"
                         name="foodImage"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md  focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 focus:outline-none focus:ring"
                      />
                      {errors?.foodImage && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -182,10 +176,7 @@ const AddFood = () => {
 
                   {/* foodQuantity */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="foodQuantity"
-                     >
+                     <label className="text-black " htmlFor="foodQuantity">
                         Food Quantity (Persons)
                      </label>
                      <input
@@ -198,7 +189,7 @@ const AddFood = () => {
                         id="foodQuantity"
                         name="foodQuantity"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
                      {errors?.foodQuantity && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -209,10 +200,7 @@ const AddFood = () => {
 
                   {/* pickupLocation */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="pickupLocation"
-                     >
+                     <label className="text-black " htmlFor="pickupLocation">
                         Pickup Location
                      </label>
                      <input
@@ -225,7 +213,7 @@ const AddFood = () => {
                         id="pickupLocation"
                         name="pickupLocation"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
                      {errors?.pickupLocation && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -236,10 +224,7 @@ const AddFood = () => {
 
                   {/* expiredDate */}
                   <div>
-                     <label
-                        htmlFor="expiredDate"
-                        className="text-gray-700 dark:text-gray-200 block"
-                     >
+                     <label htmlFor="expiredDate" className="text-black  block">
                         Expired Date
                      </label>
                      <Controller
@@ -250,7 +235,7 @@ const AddFood = () => {
                            <DatePicker
                               selected={field.value}
                               onChange={(date) => field.onChange(date)}
-                              className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                              className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                            />
                         )}
                      />
@@ -263,10 +248,7 @@ const AddFood = () => {
 
                   {/* additionalNotes */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="additionalNotes"
-                     >
+                     <label className="text-black " htmlFor="additionalNotes">
                         Additional Notes
                      </label>
                      <input
@@ -279,7 +261,7 @@ const AddFood = () => {
                         id="additionalNotes"
                         name="additionalNotes"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring"
                      />
                      {errors?.additionalNotes && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -290,10 +272,7 @@ const AddFood = () => {
 
                   {/* foodStatus */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="foodStatus"
-                     >
+                     <label className="text-black " htmlFor="foodStatus">
                         Food Status
                      </label>
                      <input
@@ -307,7 +286,7 @@ const AddFood = () => {
                         id="foodStatus"
                         name="foodStatus"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
                      {errors?.foodStatus && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -318,10 +297,7 @@ const AddFood = () => {
 
                   {/* donorImage */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="donorImage"
-                     >
+                     <label className="text-black " htmlFor="donorImage">
                         Donor Image
                      </label>
                      <input
@@ -335,7 +311,7 @@ const AddFood = () => {
                         id="donorImage"
                         name="donorImage"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
                      {errors?.donorImage && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -346,10 +322,7 @@ const AddFood = () => {
 
                   {/* donorName */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="donorName"
-                     >
+                     <label className="text-black " htmlFor="donorName">
                         Donor Name
                      </label>
                      <input
@@ -363,7 +336,7 @@ const AddFood = () => {
                         id="donorName"
                         name="donorName"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
                      {errors?.donorName && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
@@ -374,10 +347,7 @@ const AddFood = () => {
 
                   {/* donorEmail */}
                   <div>
-                     <label
-                        className="text-gray-700 dark:text-gray-200"
-                        htmlFor="donorEmail"
-                     >
+                     <label className="text-black " htmlFor="donorEmail">
                         Donor Email
                      </label>
                      <input
@@ -392,7 +362,7 @@ const AddFood = () => {
                         id="donorEmail"
                         name="donorEmail"
                         type="text"
-                        className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
+                        className="block w-full px-4 py-2 mt-2 text-black bg-white border border-gray-200 rounded-md   focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                      />
                      {errors?.donorEmail && (
                         <span className="text-red-500 block mt-1 mb-2 font-didact">
