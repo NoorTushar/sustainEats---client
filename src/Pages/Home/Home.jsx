@@ -10,18 +10,18 @@ const Home = () => {
          <Helmet>
             <title>SustainEats | Home</title>
          </Helmet>
-         <div className="mt-[68px]">
+         <section className="mt-[68px]">
             <Banner></Banner>
-         </div>
-         <div className="max-w-[1400px] w-[90%] md:w-[82%] mx-auto">
+         </section>
+         <section className="max-w-[1400px] w-[90%] md:w-[82%] mx-auto pt-[60px]">
             <AboutUs></AboutUs>
-         </div>
-         <div className="max-w-[1170px] w-[90%] md:w-[82%] mx-auto">
+         </section>
+         <section className="max-w-[1170px] w-[90%] md:w-[82%] mx-auto pt-[60px]">
             <FeaturedFoods></FeaturedFoods>
-         </div>
-         <div className="max-w-[1170px] w-[90%] md:w-[82%] mx-auto">
+         </section>
+         <section className="max-w-[1170px] w-[90%] md:w-[82%] mx-auto pt-[60px]">
             <Testimonials></Testimonials>
-         </div>
+         </section>
       </div>
    );
 };
