@@ -14,10 +14,10 @@ const Slide = ({ bgImg }) => {
             <div className="max-w-3xl">
                <p className="text-white text-lg mb-2">Lend a Helping Hand</p>
                <h1 className="mb-5 text-5xl font-bold text-ourOrange leading-[52px] md:leading-[60px]">
-                  This world needs{" "}
-                  <span className="text-ourPrimary">heroes</span> like{" "}
-                  <span className="text-ourPrimary">you</span> and{" "}
-                  <span className="text-ourPrimary">me</span>
+                  This world needs <br />
+                  heroes like <span className="text-ourPrimary">
+                     you
+                  </span> and <span className="text-ourPrimary">me</span>
                </h1>
                <p className="mb-5 text-white text-2xl">
                   Let us not waste food anymore. There is plenty to share for

@@ -9,6 +9,10 @@ const AvailableFoods = () => {
    const [searchText, setSearchText] = useState("");
    const [search, setSearch] = useState("");
    const [sort, setSort] = useState("");
+
+   // tottle layout
+   const [layout, setLayout] = useState(false);
+
    // using tanstack useQuery to get foods from database
    const { data: foods = [], isLoading } = useQuery({
       queryFn: async () => {
@@ -94,7 +98,7 @@ const AvailableFoods = () => {
          {/* title */}
          <Title supTitle="By Our Heroes" title="Available Foods"></Title>
 
-         <div className="grid lg:grid-cols-2  gap-2 justify-center mb-6">
+         <div className={"grid lg:grid-cols-2 gap-2 justify-center mb-6"}>
             {/* Search and Sort */}
             <form onSubmit={handleSearch} className="max-w-[500px]">
                <div className="flex p-1 overflow-hidden border rounded-lg focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300 w-full justify-between relative">
@@ -131,17 +135,32 @@ const AvailableFoods = () => {
                </select>
             </div>
 
-            <button
-               onClick={handleReset}
-               className="px-5 py-3 rounded-lg relative  group lightButton overflow-hidden font-medium bg-ourPrimary text-white hover:text-ourPrimary inline-block border border-ourPrimary max-w-[100px]"
-            >
-               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full "></span>
-               <span className="relative">Reset</span>
-            </button>
+            <div className="space-x-2">
+               {/* Change Layout */}
+               <button
+                  onClick={() => setLayout(!layout)}
+                  className="px-5 py-3 relative rounded-lg group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
+               >
+                  <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-100"></span>
+                  <span className="relative">Change Layout</span>
+               </button>
+
+               <button
+                  onClick={handleReset}
+                  className="px-5 py-3 rounded-lg relative  group lightButton overflow-hidden font-medium bg-ourPrimary text-white hover:text-ourPrimary inline-block border border-ourPrimary max-w-[150px]"
+               >
+                  <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full "></span>
+                  <span className="relative">Reset Form</span>
+               </button>
+            </div>
          </div>
 
          {/******** Foods Gallery ********/}
-         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+         <div
+            className={`grid md:grid-cols-2 ${
+               layout ? "lg:grid-cols-2" : "lg:grid-cols-3"
+            } gap-6`}
+         >
             {foods.map((food) => (
                <FoodCard key={food._id} food={food}></FoodCard>
             ))}
