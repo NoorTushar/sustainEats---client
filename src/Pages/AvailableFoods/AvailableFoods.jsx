@@ -137,22 +137,25 @@ const AvailableFoods = () => {
 
             <div className="space-x-2">
                {/* Change Layout */}
-               <button
-                  onClick={() => setLayout(!layout)}
-                  className="px-5 py-3 relative rounded-lg group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
-               >
-                  <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-100"></span>
-                  <span className="relative">Change Layout</span>
-               </button>
 
                <button
                   onClick={handleReset}
                   className="px-5 py-3 rounded-lg relative  group lightButton overflow-hidden font-medium bg-ourPrimary text-white hover:text-ourPrimary inline-block border border-ourPrimary max-w-[150px]"
                >
                   <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full "></span>
-                  <span className="relative">Reset Form</span>
+                  <span className="relative">Reset</span>
                </button>
             </div>
+         </div>
+
+         <div className="mb-6 text-center">
+            <button
+               onClick={() => setLayout(!layout)}
+               className="px-5 py-3 relative rounded-lg group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange "
+            >
+               <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full opacity-100"></span>
+               <span className="relative">Change Layout</span>
+            </button>
          </div>
 
          {/******** Foods Gallery ********/}
