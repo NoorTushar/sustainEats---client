@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Banner from "../../Components/Banner";
 import FeaturedFoods from "../../Components/FeaturedFoods";
+import Testimonials from "../../Components/Testimonials";
 
 const Home = () => {
    return (
@@ -13,6 +14,9 @@ const Home = () => {
          </div>
          <div className="max-w-[1170px] w-[90%] md:w-[82%] mx-auto">
             <FeaturedFoods></FeaturedFoods>
+         </div>
+         <div className="max-w-[1170px] w-[90%] md:w-[82%] mx-auto">
+            <Testimonials></Testimonials>
          </div>
       </div>
    );
