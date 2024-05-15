@@ -103,11 +103,11 @@ const MyAddedFoods = () => {
          <div>
             <section className="container px-4 mx-auto">
                <div className="flex items-center gap-x-3">
-                  <h2 className="text-lg font-medium text-ourOrange">
+                  <h2 className="text-lg font-medium text-ourBlack">
                      Total Items
                   </h2>
 
-                  <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
+                  <span className="px-3 py-1 text-xs text-white bg-ourPrimary rounded-full ">
                      {myAddedFoods.length}
                   </span>
                </div>
@@ -115,19 +115,19 @@ const MyAddedFoods = () => {
                <div className="flex flex-col mt-6">
                   <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                      <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                        <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
-                           <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                              <thead className="bg-gray-50 dark:bg-gray-800">
+                        <div className="overflow-hidden border border-ourPrimary  md:rounded-lg">
+                           <table className="min-w-full divide-y divide-ourPrimary ">
+                              <thead className="bg-ourPrimary">
                                  <tr>
                                     <th
                                        scope="col"
-                                       className="px-3 py-3.5 text-sm font-normal text-center rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-3 py-3.5 text-sm font-normal text-center rtl:text-right text-white "
                                     >
                                        <span>Sl.No</span>
                                     </th>
                                     <th
                                        scope="col"
-                                       className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-white "
                                     >
                                        <div className="flex items-center gap-x-3">
                                           <span>Name</span>
@@ -136,28 +136,28 @@ const MyAddedFoods = () => {
 
                                     <th
                                        scope="col"
-                                       className="px-9 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-9 py-3.5 text-sm font-normal text-left rtl:text-right text-white "
                                     >
                                        <span>Status</span>
                                     </th>
 
                                     <th
                                        scope="col"
-                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white "
                                     >
                                        <span>Quantity</span>
                                     </th>
 
                                     <th
                                        scope="col"
-                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white "
                                     >
                                        Expiry Date
                                     </th>
 
                                     <th
                                        scope="col"
-                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                                       className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-white "
                                     >
                                        Pickup Location
                                     </th>
@@ -170,13 +170,13 @@ const MyAddedFoods = () => {
                                     </th>
                                  </tr>
                               </thead>
-                              <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                              <tbody className="bg-white divide-y divide-ourPrimary  ">
                                  {myAddedFoods.map((food, index) => (
                                     <tr key={food._id}>
-                                       <td className="px-3 py-3.5 text-center  text-sm font-medium text-gray-700 whitespace-nowrap">
+                                       <td className="px-3 py-3.5 text-center  text-sm font-medium text-black whitespace-nowrap">
                                           {index + 1}
                                        </td>
-                                       <td className="px-4 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm font-medium text-black whitespace-nowrap">
                                           <div className="inline-flex items-center gap-x-3">
                                              <div className="flex items-center gap-x-3">
                                                 <img
@@ -185,14 +185,14 @@ const MyAddedFoods = () => {
                                                    alt={food.foodName}
                                                 />
                                                 <div>
-                                                   <h2 className="font-medium text-gray-800 dark:text-white ">
+                                                   <h2 className="font-medium text-black  ">
                                                       {food.foodName}
                                                    </h2>
                                                 </div>
                                              </div>
                                           </div>
                                        </td>
-                                       <td className="px-9 py-4 text-sm font-medium text-gray-700 whitespace-nowrap">
+                                       <td className="px-9 py-4 text-sm font-medium text-black whitespace-nowrap">
                                           <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
                                              <span
                                                 className={`h-1.5 w-1.5 rounded-full ${
@@ -221,15 +221,15 @@ const MyAddedFoods = () => {
                                              </h2>
                                           </div>
                                        </td>
-                                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.foodQuantity}
                                        </td>
-                                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                                           {new Date(
                                              food.expiredDate
                                           ).toLocaleDateString()}
                                        </td>
-                                       <td className="px-4 py-4 text-sm text-gray-500 dark:text-gray-300 whitespace-nowrap">
+                                       <td className="px-4 py-4 text-sm text-black  whitespace-nowrap">
                                           {food.pickupLocation}
                                        </td>
 
@@ -240,7 +240,7 @@ const MyAddedFoods = () => {
                                                 onClick={() =>
                                                    handleDeleteFood(food._id)
                                                 }
-                                                className="text-gray-500 transition-colors duration-200 dark:hover:text-red-500 dark:text-gray-300 hover:text-red-500 focus:outline-none"
+                                                className="text-black transition-colors duration-200 dark:hover:text-red-500  hover:text-red-500 focus:outline-none"
                                              >
                                                 <svg
                                                    xmlns="http://www.w3.org/2000/svg"
@@ -261,7 +261,7 @@ const MyAddedFoods = () => {
                                              {/* update button */}
                                              <Link
                                                 to={`/updateFood/${food._id}`}
-                                                className="text-gray-500 transition-colors duration-200 dark:hover:text-yellow-500 dark:text-gray-300 hover:text-yellow-500 focus:outline-none"
+                                                className="text-black transition-colors duration-200 dark:hover:text-yellow-500  hover:text-yellow-500 focus:outline-none"
                                              >
                                                 <svg
                                                    xmlns="http://www.w3.org/2000/svg"
