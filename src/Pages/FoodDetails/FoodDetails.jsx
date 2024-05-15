@@ -276,7 +276,7 @@ const FoodDetails = () => {
                            {/* requestorEmail */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="foodName"
                               >
                                  Requested By
@@ -294,7 +294,7 @@ const FoodDetails = () => {
                            {/* requestedDate */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="foodName"
                               >
                                  Requested On
@@ -311,7 +311,7 @@ const FoodDetails = () => {
                            {/* foodName */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_foodName"
                               >
                                  Food Name
@@ -328,7 +328,7 @@ const FoodDetails = () => {
                            {/* foodImage */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_foodImage"
                               >
                                  Food Image
@@ -345,7 +345,7 @@ const FoodDetails = () => {
                            {/* Food Id */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_foodId"
                               >
                                  Food Id
@@ -362,7 +362,7 @@ const FoodDetails = () => {
 
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_donorName"
                               >
                                  Donor Name
@@ -379,7 +379,7 @@ const FoodDetails = () => {
                            {/* donorEmail */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_donorEmail"
                               >
                                  Donor Email
@@ -397,7 +397,7 @@ const FoodDetails = () => {
                            {/* pickupLocation */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_pickupLocation"
                               >
                                  Pickup Location
@@ -413,9 +413,7 @@ const FoodDetails = () => {
                            </div>
                            {/* expiredDate */}
                            <div>
-                              <p className="text-gray-700 dark:text-gray-200">
-                                 Expired Date
-                              </p>
+                              <p className="text-gray-700 ">Expired Date</p>
                               <input
                                  className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-ourPrimary focus:ring-ourPrimary focus:ring-opacity-40 dark:focus:border-ourPrimary focus:outline-none focus:ring disabled:cursor-not-allowed"
                                  type="text"
@@ -430,7 +428,7 @@ const FoodDetails = () => {
                            {/* additionalNotes */}
                            <div>
                               <label
-                                 className="text-gray-700 dark:text-gray-200"
+                                 className="text-gray-700 "
                                  htmlFor="req_additionalNotes"
                               >
                                  Additional Notes
