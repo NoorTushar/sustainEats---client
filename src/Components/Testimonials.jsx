@@ -16,7 +16,7 @@ const Testimonials = () => {
       <>
          {/* section title */}
 
-         <Title supTitle="what our clients say" title="Testimonials"></Title>
+         <Title supTitle="What Our Clients Say" title="Testimonials"></Title>
 
          <Swiper
             autoplay={{
