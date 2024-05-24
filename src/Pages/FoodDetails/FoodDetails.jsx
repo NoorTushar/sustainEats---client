@@ -54,8 +54,8 @@ const FoodDetails = () => {
       onError: () => {
          Swal.fire({
             title: "Failed!",
-            text: `Food Requested Failed: ${error}`,
-            icon: "success",
+            text: `Food Requested Failed. Are you logged in properly?`,
+            icon: "error",
             confirmButtonText: "Ok",
          });
          console.log(error);
