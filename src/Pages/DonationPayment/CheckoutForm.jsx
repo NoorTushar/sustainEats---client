@@ -2,10 +2,14 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutForm = ({ totalPrice }) => {
    const stripe = useStripe();
    const elements = useElements();
+   const navigate = useNavigate();
+   // eslint-disable-next-line no-unused-vars
    const [transactionId, setTransactionId] = useState("");
    const [error, setError] = useState("");
    // payment (15)
@@ -78,6 +82,24 @@ const CheckoutForm = ({ totalPrice }) => {
          if (paymentIntent.status === "succeeded") {
             console.log("transaction id: ", paymentIntent.id);
             setTransactionId(paymentIntent.id);
+            // payment (20) - save payment info to database
+            const payment = {
+               email: user.email,
+               price: totalPrice,
+               transactionId: paymentIntent.id,
+               date: new Date(), // utc data convert, use moment js
+            };
+
+            const res = await axiosSecure.post("/payments", payment);
+            if (res.data?.paymentResult?.insertedId) {
+               Swal.fire({
+                  title: "Thank You!",
+                  text: "Your donation was successful",
+                  icon: "success",
+               });
+            }
+
+            navigate("/donation-history");
          }
       }
    };

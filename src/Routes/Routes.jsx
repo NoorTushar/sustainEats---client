@@ -12,6 +12,7 @@ import MyAddedFoods from "../Pages/MyAddedFoods/MyAddedFoods";
 import UpdateMyFood from "../Pages/UpdateMyFood/UpdateMyFood";
 import MyRequestedFoods from "../Pages/MyRequestedFoods/MyRequestedFoods";
 import DonationPayment from "../Pages/DonationPayment/DonationPayment";
+import DonationHistory from "../Pages/DonationHistory/DonationHistory";
 
 export const router = createBrowserRouter([
    {
@@ -44,6 +45,14 @@ export const router = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <DonationPayment></DonationPayment>
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "/donation-history",
+            element: (
+               <PrivateRoute>
+                  <DonationHistory></DonationHistory>
                </PrivateRoute>
             ),
          },
