@@ -11,6 +11,7 @@ import FoodDetails from "../Pages/FoodDetails/FoodDetails";
 import MyAddedFoods from "../Pages/MyAddedFoods/MyAddedFoods";
 import UpdateMyFood from "../Pages/UpdateMyFood/UpdateMyFood";
 import MyRequestedFoods from "../Pages/MyRequestedFoods/MyRequestedFoods";
+import DonationPayment from "../Pages/DonationPayment/DonationPayment";
 
 export const router = createBrowserRouter([
    {
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
             element: (
                <PrivateRoute>
                   <AddFood></AddFood>
+               </PrivateRoute>
+            ),
+         },
+         {
+            path: "/donation-payment",
+            element: (
+               <PrivateRoute>
+                  <DonationPayment></DonationPayment>
                </PrivateRoute>
             ),
          },

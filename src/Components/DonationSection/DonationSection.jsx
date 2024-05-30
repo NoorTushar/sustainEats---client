@@ -23,7 +23,7 @@ const DonationSection = () => {
             </p>
             <div className="text-center col-span-3 md:col-span-1">
                <Link
-                  to={`/`}
+                  to={`/donation-payment`}
                   className=" px-5 py-2 relative rounded group lightButton overflow-hidden font-medium bg-ourOrange text-ourBlack inline-block border border-ourOrange"
                >
                   <span className="absolute top-0 left-0 flex w-full h-0 mb-0 transition-all duration-200 ease-out transform translate-y-0 bg-white group-hover:h-full "></span>
