@@ -3,6 +3,7 @@ import Title from "../../Components/Title/Title";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
 
 const DonationHistory = () => {
    const { user } = useAuth();
@@ -51,7 +52,11 @@ const DonationHistory = () => {
                         <th>{index + 1}</th>
                         <td>${payment.price}</td>
                         <td>{payment.transactionId}</td>
-                        <td>{payment.date}</td>
+                        <td>
+                           {moment(payment.date).format(
+                              "MMMM Do YYYY, h:mm:ss a"
+                           )}
+                        </td>
                      </tr>
                   ))}
                </tbody>
