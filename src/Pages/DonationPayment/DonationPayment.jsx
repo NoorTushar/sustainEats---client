@@ -3,14 +3,19 @@ import Title from "../../Components/Title/Title";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK);
 
 const DonationPayment = () => {
    const amountRef = useRef(null);
-   const totalAmount = amountRef?.current?.value;
-   console.log(totalAmount);
+   const [totalPrice, setTotalPrice] = useState(null);
+   console.log(totalPrice);
+
+   const handleAmountChange = (e) => {
+      const amount = e.target.value;
+      setTotalPrice(amount);
+   };
 
    return (
       <div className="mt-[68px]">
@@ -30,13 +35,14 @@ const DonationPayment = () => {
                type="number"
                placeholder="Amount"
                className="border p-2 outline-ourOrange"
+               onChange={handleAmountChange}
             />
          </div>
 
          <div className="max-w-xl mx-auto my-10">
             <Elements stripe={stripePromise}>
                {/* // payment (3) */}
-               <CheckoutForm totalAmount={totalAmount}></CheckoutForm>
+               <CheckoutForm totalPrice={totalPrice}></CheckoutForm>
             </Elements>
          </div>
       </div>
