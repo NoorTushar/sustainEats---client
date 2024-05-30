@@ -27,6 +27,13 @@ const DonationHistory = () => {
             supTitle="Our Sincere Thanks"
          ></Title>
 
+         <h2 className="text-center mb-4">
+            Your Total Donations: $
+            {payments.reduce(
+               (total, item) => total + parseFloat(item.price),
+               0
+            )}
+         </h2>
          <div className="overflow-x-auto max-w-4xl mx-auto">
             <table className="table table-zebra">
                {/* head */}
