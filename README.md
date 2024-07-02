@@ -12,26 +12,48 @@ Our platform aims to facilitate the sharing of surplus food within the community
 
 # Key Features
 
-1. **CRUD Operations**: Our platform supports full CRUD (Create, Read, Update, Delete) operations, allowing users to add new foods, update existing ones, and delete foods they no longer wish to share. This enables users to manage their food listings efficiently and keep their information up to date.
+1. **Efficient Food Management**: Developed full **CRUD** operations for managing food listings, ensuring easy updating and removal of surplus items using **REST APIs**.
 
-2. **Make Donation using Stripe**: You can make donation to us by using Stripe payment system. Check your donations in the 'My Donations' tab.
+2. **Donation and Payment System**: Integrated _Stripe_ for secure donation and payment transactions, enabling users to contribute financially to the cause.
 
-3. **Authentication**: We provide a robust authentication system that allows users to register and log in securely. Social login options via Google and Github are also available for convenience.
+3. **User Authentication and Security**: Utilized _Firebase_ and _JWT_ for secure user authentication, safeguarding user data, and ensuring a trusted environment.
 
-4. **Search and Sort Functionality**: Users can easily search for specific foods by name and sort them based on expiration date, enhancing the browsing experience and making it easier to find relevant items.
+4. **Search and Sort Functionality**: Users can easily search for specific foods by name and sort them based on expiration date
 
-5. **Responsive Design**: The website is designed to be responsive, ensuring optimal viewing and interaction across a wide range of devices, including desktops, tablets, and mobile phones.
+5. **Private Routes**: Certain routes, such as adding food and managing user-specific data, are protected and accessible only to authenticated users, ensuring data privacy and security.
 
-6. **Dynamic Content**: The platform dynamically fetches and displays content, such as available foods and user requests, ensuring that users always see the latest information.
+# If you want to clone
 
-7. **Private Routes**: Certain routes, such as adding food and managing user-specific data, are protected and accessible only to authenticated users, ensuring data privacy and security.
+1. Make sure to install the npm packages after downloading the repository.
 
-8. **Interactive UI Elements**: Our platform features interactive elements such as buttons, forms, and modals, providing users with intuitive controls and a seamless browsing experience.
+Open the project terminal and write `npm i`
 
-9. **Error Handling**: We implement robust error handling mechanisms to gracefully handle errors and provide users with helpful error messages, ensuring a smooth and frustration-free experience.
+2. Make sure to have firebase installed and then create `.env.local` file in the root directory. In the `.env.local` file write like this:
 
-# Contact Us
+```
+VITE_APIKEY=xyz
 
-If you have any questions, feedback, or suggestions, please feel free to reach out to us. You can contact the project maintainers via [email: noor.tushar.khan@gmail.com, LinkedIn: https://www.linkedin.com/in/noortushar/], and we'll be happy to assist you.
+VITE_AUTHDOMAIN=xyz
 
-Thank you for your interest in our project! We look forward to your contributions and making a positive impact in our community.
+VITE_PROJECTID=xyz
+
+VITE_STORAGEBUCKET=xyz
+
+VITE_MESSAGINGSENDERID=xyz
+
+VITE_APPID=xyz
+```
+
+replace the xyz with your actual firebase auth configuration
+
+3. add the server URL in the `.env.local` file.
+
+```
+VITE_API_URL= `here give your server URL
+```
+
+4. add payment gateway primary key in the `.env.local` file
+
+VITE_Payment_Gateway_PK= `your primary key`
+
+-  ! Now make sure to clone the server repository and follow the readme of that repository
