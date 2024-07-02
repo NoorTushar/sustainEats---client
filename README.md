@@ -49,11 +49,11 @@ replace the xyz with your actual firebase auth configuration
 3. add the server URL in the `.env.local` file.
 
 ```
-VITE_API_URL= `here give your server URL
+VITE_API_URL= here paste your server URL
 ```
 
 4. add payment gateway primary key in the `.env.local` file
 
 VITE_Payment_Gateway_PK= `your primary key`
 
--  ! Now make sure to clone the server repository and follow the readme of that repository
+-  ! Now make sure to clone the server repository and follow the readme of that repository - https://github.com/NoorTushar/sustainEats---server
